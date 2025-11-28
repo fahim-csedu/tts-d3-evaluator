@@ -344,9 +344,13 @@ app.get('/api/transcript', requireAuth, async (req, res) => {
             const content = fs.readFileSync(jsonFullPath, 'utf8');
             const jsonData = JSON.parse(content);
             
-            // TTS D3 format: transcript is in annotation[0].sentence
+            // TTS D3 format: transcript is concatenated from all annotation objects
             if (jsonData.annotation && Array.isArray(jsonData.annotation) && jsonData.annotation.length > 0) {
-                const transcript = jsonData.annotation[0].sentence || '';
+                // Concatenate all sentences from all annotation objects
+                const transcript = jsonData.annotation
+                    .map(ann => ann.sentence || '')
+                    .filter(s => s.trim().length > 0)
+                    .join(' ');
                 return res.json({ transcript: transcript });
             }
             
@@ -389,9 +393,12 @@ app.get('/api/reference', requireAuth, async (req, res) => {
         const content = fs.readFileSync(jsonFullPath, 'utf8');
         const jsonData = JSON.parse(content);
         
-        // Extract transcript from annotation[0].sentence
+        // Extract transcript by concatenating all sentences from all annotation objects
         const transcript = jsonData.annotation && Array.isArray(jsonData.annotation) && jsonData.annotation.length > 0
-            ? jsonData.annotation[0].sentence || ''
+            ? jsonData.annotation
+                .map(ann => ann.sentence || '')
+                .filter(s => s.trim().length > 0)
+                .join(' ')
             : '';
         
         return res.json({
@@ -660,9 +667,12 @@ app.get('/api/file-data/:filepath(*)', requireAuth, (req, res) => {
                 const jsonContent = fs.readFileSync(jsonFullPath, 'utf-8');
                 const jsonData = JSON.parse(jsonContent);
                 
-                // Extract transcript from annotation[0].sentence
+                // Extract transcript by concatenating all sentences from all annotation objects
                 const transcript = jsonData.annotation && Array.isArray(jsonData.annotation) && jsonData.annotation.length > 0
-                    ? jsonData.annotation[0].sentence || ''
+                    ? jsonData.annotation
+                        .map(ann => ann.sentence || '')
+                        .filter(s => s.trim().length > 0)
+                        .join(' ')
                     : '';
                 
                 fileData.transcript = transcript;
