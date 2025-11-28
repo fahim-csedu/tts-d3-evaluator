@@ -1,0 +1,18 @@
+{
+    "duration": 2.694,
+    "book_name": "AmarBanglaBoiClass1",
+    "source": "NCTB",
+    "path": "collect/NCTB/AmarBanglaBoiClass1/0a0a7c7c-aaa2-417f-ab22-7ce5e46c5cd1.flac",
+    "speech_id": "0a0a7c7c-aaa2-417f-ab22-7ce5e46c5cd1",
+    "annotation": [
+        {
+            "tagList": [
+                "OS"
+            ],
+            "start": 0.06072313,
+            "end": 2.694,
+            "id": "xfreInmi",
+            "sentence": "নিজের জানা আরেকটি ছড়া বলি"
+        }
+    ]
+}
