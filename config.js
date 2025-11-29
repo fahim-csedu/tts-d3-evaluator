@@ -6,6 +6,9 @@ const config = {
     // Directory for transcriptions (same as audio base dir - JSON files are in same folders)
     TRANSCRIPTION_DIR: process.env.TRANSCRIPTION_DIR || 'D:\\TTS D3\\TTS D3 Data\\collect',
     
+    // Directory for annotation files
+    ANNOTATIONS_DIR: process.env.ANNOTATIONS_DIR || 'D:\\TTS D3\\TTS D3 Data\\annotations',
+    
     // Server port
     PORT: process.env.PORT || 3002,
     

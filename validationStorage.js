@@ -11,6 +11,8 @@ const path = require('path');
  * @property {boolean} is_reference_correct - True if reference was marked correct
  * @property {boolean} is_api_correct - True if API transcript was marked correct
  * @property {string} ideal_transcript - The final validated correct transcript
+ * @property {boolean} punctuation_missing - True if punctuation is missing between sentences
+ * @property {string} notes - Validation notes
  * @property {string} timestamp - ISO timestamp of validation
  * @property {string} [annotator] - Optional: username of annotator
  */
@@ -134,6 +136,8 @@ class ValidationStorage {
                 is_api_correct: record.is_api_correct || false,
                 ideal_transcript: record.ideal_transcript || '',
                 timestamp: record.timestamp || new Date().toISOString(),
+                punctuation_missing: record.punctuation_missing || false,
+                notes: record.notes || '',
                 ...(record.annotator && { annotator: record.annotator }),
                 ...(issues.length > 0 && { _data_issues: issues })
             };

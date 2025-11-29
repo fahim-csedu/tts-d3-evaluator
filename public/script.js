@@ -125,7 +125,7 @@ class AudioFileBrowser {
         this.selectReferenceBtn = document.getElementById('selectReference');
         this.selectAPIBtn = null; // Removed for TTS
         this.customTranscriptInput = document.getElementById('customTranscript');
-        this.submitCustomBtn = document.getElementById('submitCustom');
+        this.punctuationMissingInput = document.getElementById('punctuationMissing');
         this.validationNotesInput = document.getElementById('validationNotes');
         this.selectionFeedback = document.getElementById('selectionFeedback');
         
@@ -165,7 +165,6 @@ class AudioFileBrowser {
             this.selectAPIBtn.addEventListener('click', () => this.handleAPISelection());
         }
         this.customTranscriptInput.addEventListener('input', () => this.handleCustomTranscriptInput());
-        this.submitCustomBtn.addEventListener('click', () => this.handleCustomTranscriptSubmit());
         
         // Navigation control event listeners
         this.previousBtn.addEventListener('click', () => this.navigateToPrevious());
@@ -318,6 +317,7 @@ class AudioFileBrowser {
     async copyAndSave() {
         try {
             const filename = this.selectedFile?.name;
+            const filePath = this.selectedFile?.path || this.selectedFile?.audioFile;
             
             if (!filename) {
                 this.annotationStatus.textContent = 'No file selected';
@@ -325,37 +325,71 @@ class AudioFileBrowser {
                 return;
             }
             
+            // Construct absolute path: D:\TTS D3\TTS D3 Data\collect\{relativePath}
+            // Convert forward slashes to backslashes for Windows path
+            const baseDir = 'D:\\TTS D3\\TTS D3 Data\\collect';
+            const absolutePath = filePath 
+                ? `${baseDir}\\${filePath.replace(/\//g, '\\')}`
+                : `${baseDir}\\${filename}`;
+            
+            // Check if user has entered custom transcript but hasn't selected it
+            const customText = this.customTranscriptInput?.value?.trim() || '';
+            if (customText.length > 0 && !this.selectedTranscript) {
+                // Auto-select custom transcript
+                this.selectedTranscript = {
+                    type: 'custom',
+                    text: customText,
+                    is_reference_correct: false,
+                    is_api_correct: false
+                };
+            }
+            
             if (!this.selectedTranscript) {
-                this.annotationStatus.textContent = 'Please select a transcript first';
+                this.annotationStatus.textContent = 'Please select a transcript or enter a corrected one';
                 this.annotationStatus.className = 'annotation-status error';
+                return;
+            }
+            
+            // First, save the validation (skip auto-advance since we're copying)
+            const saved = await this.submitValidation(true);
+            if (!saved) {
+                // If save failed, don't proceed with copy
                 return;
             }
             
             // Get duration from metadata
             const duration = this.currentReference?.duration_seconds || 
-                           this.currentReference?.Duration_s || '';
-            
-            // Get CER from metadata
-            const cer = this.currentReference?.cer || 
-                       this.currentReference?.CER || '';
+                           this.currentReference?.Duration_s || 
+                           this.currentReference?.duration || '';
             
             // Get notes from metadata (original notes from Undefined listing)
             const metadataNotes = this.currentReference?.notes || '';
             
-            // Get validation notes from user input
-            const validationNotes = this.validationNotesInput?.value?.trim() || '';
+            // Get validation notes from user input (replace newlines with spaces for CSV)
+            const validationNotes = (this.validationNotesInput?.value?.trim() || '').replace(/\n/g, ' ');
             
-            // Combine notes if both exist
+            // Get punctuation missing flag
+            const punctuationMissing = this.punctuationMissingInput?.checked ? 'TRUE' : 'FALSE';
+            
+            // Combine notes if both exist (replace newlines in metadata notes too)
             const combinedNotes = [metadataNotes, validationNotes]
                 .filter(n => n)
+                .map(n => n.replace(/\n/g, ' ')) // Replace newlines in each note
                 .join(' | ');
+            
+            // Get transcripts (keep original for annotation, replace newlines for CSV)
+            const originalTranscriptRaw = this.referenceContent.textContent || '';
+            const correctedTranscriptRaw = this.selectedTranscript.text || '';
+            const originalTranscript = originalTranscriptRaw.replace(/\n/g, ' '); // For CSV
+            const correctedTranscript = correctedTranscriptRaw.replace(/\n/g, ' '); // For CSV
             
             // Comprehensive row data with all metadata
             const rowData = [
-                filename,                                           // File ID
-                this.referenceContent.textContent || '',           // Original Transcript
-                this.selectedTranscript.text || '',                // Corrected Transcript (if any)
+                absolutePath,                                        // Absolute path to audio file
+                originalTranscript,                                 // Original Transcript (newlines replaced with spaces)
+                correctedTranscript,                                // Corrected Transcript (newlines replaced with spaces)
                 this.selectedTranscript.is_reference_correct ? 'TRUE' : 'FALSE',  // is_transcript_correct
+                punctuationMissing,                                // Punctuation missing between sentences
                 duration,                                          // Duration (seconds)
                 combinedNotes,                                    // Notes (metadata + validation)
                 new Date().toISOString()                          // Timestamp
@@ -364,12 +398,43 @@ class AudioFileBrowser {
             const tsvData = rowData.join('\t');
             await navigator.clipboard.writeText(tsvData);
             
-            this.annotationStatus.textContent = 'Copied to clipboard!';
+            // Save annotation data to individual JSON file (use original transcripts with newlines)
+            try {
+                const annotationData = {
+                    filename: filename,
+                    absolutePath: absolutePath,
+                    originalTranscript: originalTranscriptRaw, // Keep newlines in stored data
+                    correctedTranscript: correctedTranscriptRaw, // Keep newlines in stored data
+                    isTranscriptCorrect: this.selectedTranscript.is_reference_correct ? 'TRUE' : 'FALSE',
+                    punctuationMissing: punctuationMissing,
+                    duration: duration,
+                    notes: combinedNotes,
+                    timestamp: new Date().toISOString()
+                };
+                
+                const annotationResponse = await this.fetchWithRetry('/api/annotation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-session-id': this.sessionId
+                    },
+                    body: JSON.stringify(annotationData)
+                }, 2);
+                
+                if (!annotationResponse.ok) {
+                    console.warn('Failed to save annotation file:', await annotationResponse.text());
+                }
+            } catch (error) {
+                console.error('Error saving annotation file:', error);
+                // Don't fail the copy operation if annotation save fails
+            }
+            
+            this.annotationStatus.textContent = 'Saved and copied to clipboard!';
             this.annotationStatus.className = 'annotation-status success';
             
             // Visual feedback
             const originalText = this.copyAndSaveBtn.textContent;
-            this.copyAndSaveBtn.textContent = '✓ Copied!';
+            this.copyAndSaveBtn.textContent = '✓ Saved & Copied!';
             this.copyAndSaveBtn.style.background = '#218838';
             
             setTimeout(() => {
@@ -842,7 +907,6 @@ class AudioFileBrowser {
             this.currentFileSpan.textContent = filename;
             this.transcriptionStatus.textContent = 'Loading data...';
             this.transcriptionStatus.className = 'transcription-status loading';
-            this.transcriptContent.textContent = 'Loading...';
             this.referenceContent.textContent = 'Loading...';
             
             // Fetch all data from single endpoint
@@ -879,34 +943,23 @@ class AudioFileBrowser {
                 this.transcriptionStatus.className = 'transcription-status error';
             }
             
-            // Display model transcript
-            if (fileData.model_transcript) {
-                this.currentTranscript = { transcript: fileData.model_transcript };
-                this.displayTranscript(this.currentTranscript);
+            // Display transcript from fileData
+            if (fileData.transcript) {
+                this.referenceContent.textContent = fileData.transcript;
+                this.transcriptionStatus.textContent = 'Data loaded';
+                this.transcriptionStatus.className = 'transcription-status success';
+            } else if (fileData.reference_text) {
+                this.referenceContent.textContent = fileData.reference_text;
                 this.transcriptionStatus.textContent = 'Data loaded';
                 this.transcriptionStatus.className = 'transcription-status success';
             } else {
-                this.transcriptContent.textContent = 'Model transcript not available';
-                this.currentTranscript = null;
-            }
-            
-            // Display reference text
-            if (fileData.reference_text) {
-                this.referenceContent.textContent = fileData.reference_text;
-            } else {
-                this.referenceContent.textContent = 'No reference text available';
-                console.warn(`Missing reference text for ${filename}`);
+                this.referenceContent.textContent = 'Transcript not available';
+                this.transcriptionStatus.textContent = 'Transcript not found';
+                this.transcriptionStatus.className = 'transcription-status error';
             }
             
             // Display metadata
             if (fileData.metadata) {
-                // Display CSV CER if available
-                if (this.csvCERSpan && fileData.metadata.cer !== undefined && fileData.metadata.cer !== null) {
-                    this.csvCERSpan.textContent = (fileData.metadata.cer * 100).toFixed(2) + '%';
-                } else if (this.csvCERSpan) {
-                    this.csvCERSpan.textContent = 'N/A';
-                }
-                
                 // Display notes if available
                 if (fileData.metadata.notes) {
                     this.transcriptionStatus.textContent += ` (Note: ${fileData.metadata.notes})`;
@@ -916,26 +969,23 @@ class AudioFileBrowser {
                 this.currentReference = fileData.metadata;
             }
             
-            // Show cache status
-            if (fileData.cached) {
-                console.log(`Loaded ${filename} from cache`);
-            } else {
-                console.log(`Loaded ${filename} on-demand (cache miss)`);
-            }
-            
             // Handle existing validation (for review and modification)
             if (validationResponse.ok) {
                 const validation = await validationResponse.json();
                 this.loadValidation(validation);
+            } else {
+                // No validation exists, ensure fields are cleared
+                if (this.punctuationMissingInput) {
+                    this.punctuationMissingInput.checked = false;
+                }
+                if (this.validationNotesInput) {
+                    this.validationNotesInput.value = '';
+                }
             }
-            
-            // Highlight differences after both transcripts are loaded
-            this.highlightDifferences();
             
         } catch (error) {
             console.error('Error loading CSV audio file:', error);
-            this.transcriptContent.textContent = 'Error loading transcript';
-            this.referenceContent.textContent = 'Error loading reference';
+            this.referenceContent.textContent = 'Error loading transcript';
             this.transcriptionStatus.textContent = 'Error: ' + error.message;
             this.transcriptionStatus.className = 'transcription-status error';
         }
@@ -992,14 +1042,20 @@ class AudioFileBrowser {
                 this.audioPlayer.addEventListener('error', onError);
             });
             
-            // Fetch transcript and validation in parallel with retry logic
-            const [refResponse, validationResponse, audioDuration] = await Promise.all([
+            // Get base filename for annotation lookup
+            const baseFilename = item.name.replace(/\.(flac|wav|mp3|m4a|ogg)$/i, '');
+            
+            // Fetch transcript, validation, and annotation in parallel with retry logic
+            const [refResponse, validationResponse, annotationResponse, audioDuration] = await Promise.all([
                 this.fetchWithRetry(`/api/reference?file=${encodeURIComponent(item.audioFile)}`, {
                     headers: { 'x-session-id': this.sessionId }
                 }, 2),
                 this.fetchWithRetry(`/api/validation/${encodeURIComponent(item.name)}`, {
                     headers: { 'x-session-id': this.sessionId }
                 }, 2),
+                this.fetchWithRetry(`/api/annotation/${encodeURIComponent(baseFilename)}`, {
+                    headers: { 'x-session-id': this.sessionId }
+                }, 2).catch(() => ({ ok: false })), // Don't fail if annotation doesn't exist
                 audioDurationPromise.catch(error => {
                     console.error('Audio duration loading error:', error);
                     return null; // Return null if audio fails to load
@@ -1034,10 +1090,34 @@ class AudioFileBrowser {
                 console.warn(`Failed to load reference data for ${item.name}`);
             }
             
-            // Handle existing validation (for review and modification)
-            if (validationResponse.ok) {
+            // Handle existing annotation file (preferred - has all fields)
+            if (annotationResponse.ok) {
+                try {
+                    const annotation = await annotationResponse.json();
+                    console.log('Loaded annotation data:', annotation);
+                    this.loadAnnotation(annotation);
+                } catch (error) {
+                    console.error('Error parsing annotation response:', error);
+                    // Fall through to validation loading
+                    if (validationResponse.ok) {
+                        const validation = await validationResponse.json();
+                        this.loadValidation(validation);
+                    }
+                }
+            } else if (validationResponse.ok) {
+                // Fallback to validation data if annotation doesn't exist
                 const validation = await validationResponse.json();
+                console.log('Loaded validation data (fallback):', validation);
                 this.loadValidation(validation);
+            } else {
+                // No validation exists, ensure fields are cleared
+                console.log('No annotation or validation found, clearing fields');
+                if (this.punctuationMissingInput) {
+                    this.punctuationMissingInput.checked = false;
+                }
+                if (this.validationNotesInput) {
+                    this.validationNotesInput.value = '';
+                }
             }
             
         } catch (error) {
@@ -1414,23 +1494,19 @@ class AudioFileBrowser {
         // Disable custom input when a selection is made
         this.customTranscriptInput.value = '';
         this.customTranscriptInput.disabled = true;
-        this.submitCustomBtn.disabled = true;
         
         // Highlight the selected button
         this.selectReferenceBtn.style.background = '#28a745';
-        this.selectAPIBtn.style.background = '';
+        if (this.selectAPIBtn) this.selectAPIBtn.style.background = '';
         
-        // Submit validation to backend
-        await this.submitValidation();
+        // Don't auto-submit - user will click "Save and Copy" after filling all fields
+        this.showSelectionFeedback('Transcript marked as correct. Fill other fields and click "Save and Copy"', 'info');
     }
     
     // API selection removed for TTS evaluation
     
     handleCustomTranscriptInput() {
         const customText = this.customTranscriptInput.value.trim();
-        
-        // Enable submit button only if input is not empty
-        this.submitCustomBtn.disabled = customText.length === 0;
         
         // Clear any previous selection when user starts typing
         if (customText.length > 0) {
@@ -1478,17 +1554,17 @@ class AudioFileBrowser {
         await this.submitValidation();
     }
     
-    async submitValidation() {
+    async submitValidation(skipAutoAdvance = false) {
         if (!this.selectedTranscript) {
             this.showSelectionFeedback('No selection made', 'error');
-            return;
+            return false;
         }
         
         const filename = this.selectedFile?.name || document.getElementById('annFilename')?.value;
         
         if (!filename) {
             this.showSelectionFeedback('No file selected', 'error');
-            return;
+            return false;
         }
         
         // Prepare validation data
@@ -1497,6 +1573,7 @@ class AudioFileBrowser {
             is_reference_correct: this.selectedTranscript.is_reference_correct,
             is_api_correct: false, // Not used for TTS
             ideal_transcript: this.selectedTranscript.text,
+            punctuation_missing: this.punctuationMissingInput?.checked || false,
             notes: this.validationNotesInput?.value?.trim() || '',
             timestamp: new Date().toISOString()
         };
@@ -1508,7 +1585,6 @@ class AudioFileBrowser {
             // Disable buttons during submission
             this.selectReferenceBtn.disabled = true;
             if (this.selectAPIBtn) this.selectAPIBtn.disabled = true;
-            this.submitCustomBtn.disabled = true;
             
             // Use fetchWithRetry for automatic retry on network errors
             const response = await this.fetchWithRetry('/api/validation', {
@@ -1539,10 +1615,14 @@ class AudioFileBrowser {
                     this.markClipAsValidated(currentFilename);
                 }
                 
-                // Automatically advance to next clip after successful validation
-                setTimeout(() => {
-                    this.navigateToNext();
-                }, 1000); // Small delay to show success message
+                // Automatically advance to next clip after successful validation (unless skipAutoAdvance is true)
+                if (!skipAutoAdvance) {
+                    setTimeout(() => {
+                        this.navigateToNext();
+                    }, 1000); // Small delay to show success message
+                }
+                
+                return true;
             } else {
                 // Error feedback with retry option
                 const errorMessage = result.error || 'Failed to save validation';
@@ -1554,8 +1634,9 @@ class AudioFileBrowser {
                 this.selectionFeedback.onclick = () => {
                     this.selectionFeedback.onclick = null;
                     this.selectionFeedback.style.cursor = '';
-                    this.submitValidation();
+                    this.submitValidation(skipAutoAdvance);
                 };
+                return false;
             }
         } catch (error) {
             // Network or other error with retry option
@@ -1567,13 +1648,13 @@ class AudioFileBrowser {
             this.selectionFeedback.onclick = () => {
                 this.selectionFeedback.onclick = null;
                 this.selectionFeedback.style.cursor = '';
-                this.submitValidation();
+                this.submitValidation(skipAutoAdvance);
             };
+            return false;
         } finally {
             // Re-enable buttons
             this.selectReferenceBtn.disabled = false;
             if (this.selectAPIBtn) this.selectAPIBtn.disabled = false;
-            this.submitCustomBtn.disabled = this.customTranscriptInput.value.trim().length === 0;
         }
     }
     
@@ -1596,15 +1677,85 @@ class AudioFileBrowser {
         // Reset UI
         this.customTranscriptInput.value = '';
         this.customTranscriptInput.disabled = false;
-        this.submitCustomBtn.disabled = true;
+        if (this.punctuationMissingInput) this.punctuationMissingInput.checked = false;
         this.validationNotesInput.value = '';
         this.selectReferenceBtn.style.background = '';
         if (this.selectAPIBtn) this.selectAPIBtn.style.background = '';
         this.selectionFeedback.style.display = 'none';
     }
     
+    loadAnnotation(annotation) {
+        // Pre-populate the form with existing annotation data (preferred method)
+        console.log('Loading existing annotation:', annotation);
+        
+        // Determine which type of selection was made based on is_transcript_correct
+        const isCorrect = annotation.is_transcript_correct === 'TRUE' || annotation.is_transcript_correct === true;
+        
+        if (isCorrect) {
+            // Reference transcript was correct
+            this.selectedTranscript = {
+                type: 'reference',
+                text: annotation.original_transcript || '',
+                is_reference_correct: true,
+                is_api_correct: false
+            };
+            
+            // Highlight the reference button
+            this.selectReferenceBtn.style.background = '#28a745';
+            if (this.selectAPIBtn) this.selectAPIBtn.style.background = '';
+            
+            // Disable custom input
+            this.customTranscriptInput.value = '';
+            this.customTranscriptInput.disabled = true;
+            
+        } else {
+            // Custom transcript was entered
+            this.selectedTranscript = {
+                type: 'custom',
+                text: annotation.corrected_transcript || '',
+                is_reference_correct: false,
+                is_api_correct: false
+            };
+            
+            // Clear button highlights
+            this.selectReferenceBtn.style.background = '';
+            if (this.selectAPIBtn) this.selectAPIBtn.style.background = '';
+            
+            // Populate custom input
+            this.customTranscriptInput.value = annotation.corrected_transcript || '';
+            this.customTranscriptInput.disabled = false;
+        }
+        
+        // Restore punctuation missing flag
+        if (this.punctuationMissingInput) {
+            // Check for both 'TRUE' string and boolean true
+            const punctuationMissing = annotation.punctuation_missing === 'TRUE' || 
+                                      annotation.punctuation_missing === true ||
+                                      annotation.punctuation_missing === 'true';
+            this.punctuationMissingInput.checked = punctuationMissing;
+            console.log('Restored punctuation_missing:', punctuationMissing, 'from value:', annotation.punctuation_missing);
+        } else {
+            console.warn('punctuationMissingInput element not found');
+        }
+        
+        // Restore notes (always set, even if empty)
+        if (this.validationNotesInput) {
+            const notes = annotation.notes || '';
+            this.validationNotesInput.value = notes;
+            console.log('Restored notes:', notes, 'from annotation.notes:', annotation.notes);
+        } else {
+            console.warn('validationNotesInput element not found');
+        }
+        
+        // Show feedback that this is a previously annotated clip
+        this.showSelectionFeedback(
+            `Previously annotated on ${new Date(annotation.timestamp).toLocaleString()}`,
+            'info'
+        );
+    }
+    
     loadValidation(validation) {
-        // Pre-populate the form with existing validation data
+        // Pre-populate the form with existing validation data (fallback method)
         console.log('Loading existing validation:', validation);
         
         // Determine which type of selection was made
@@ -1624,7 +1775,6 @@ class AudioFileBrowser {
             // Disable custom input
             this.customTranscriptInput.value = '';
             this.customTranscriptInput.disabled = true;
-            this.submitCustomBtn.disabled = true;
             
         } else {
             // Custom transcript was entered
@@ -1642,12 +1792,20 @@ class AudioFileBrowser {
             // Populate custom input
             this.customTranscriptInput.value = validation.ideal_transcript;
             this.customTranscriptInput.disabled = false;
-            this.submitCustomBtn.disabled = false;
         }
         
-        // Restore notes if they exist
-        if (validation.notes) {
-            this.validationNotesInput.value = validation.notes;
+        // Restore punctuation missing flag (explicitly check for true, default to false)
+        if (this.punctuationMissingInput) {
+            const punctuationMissing = validation.punctuation_missing === true;
+            this.punctuationMissingInput.checked = punctuationMissing;
+            console.log('Restored punctuation_missing:', punctuationMissing);
+        }
+        
+        // Restore notes (always set, even if empty)
+        if (this.validationNotesInput) {
+            const notes = validation.notes || '';
+            this.validationNotesInput.value = notes;
+            console.log('Restored notes:', notes);
         }
         
         // Show feedback that this is a previously validated clip
@@ -1663,9 +1821,9 @@ class AudioFileBrowser {
             // Get all audio files from the file list
             const items = this.fileList.querySelectorAll('.file-item[data-type="audio"]');
             this.clipList = Array.from(items).map(item => {
-                const filename = item.dataset.filename;
+                const path = item.dataset.path;
                 const name = item.querySelector('.file-name').textContent.split('\n')[0].trim(); // Remove duration text
-                return { filename: filename || name, name };
+                return { filename: path || name, name: name, path: path };
             });
             
             // Load validation status for all clips
@@ -1829,16 +1987,38 @@ class AudioFileBrowser {
         // Find the corresponding file item in the UI
         const fileItems = this.fileList.querySelectorAll('.file-item[data-type="audio"]');
         for (const item of fileItems) {
-            const itemFilename = item.dataset.filename;
+            const itemPath = item.dataset.path;
             const itemName = item.querySelector('.file-name').textContent.split('\n')[0].trim();
             
-            if (itemFilename === clip.filename || itemName === clip.name) {
-                // Select and load the file
-                const fileData = {
-                    filename: clip.filename || clip.name
+            // Match by name or path
+            const matches = (clip.filename && (clip.filename === itemName || clip.filename === itemPath)) ||
+                          (clip.name && (clip.name === itemName || clip.name === itemPath)) ||
+                          (itemName === clip.name || itemName === clip.filename);
+            
+            if (matches && itemPath) {
+                // Get the file item data from the original item structure
+                // We need to find the original item data that was used to render this
+                const fileItem = {
+                    name: clip.name || itemName,
+                    type: 'audio',
+                    audioFile: itemPath,
+                    path: itemPath
                 };
                 
-                this.selectCSVFile(item, fileData);
+                // Select the file item in the UI
+                this.fileList.querySelectorAll('.file-item').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                item.classList.add('selected');
+                this.selectedFile = fileItem;
+                
+                // Update current clip index
+                this.currentClipIndex = this.findClipIndexByName(clip.name || clip.filename);
+                this.saveCurrentClipIndex();
+                this.updateProgressDisplay();
+                
+                // Load the audio file
+                this.loadAudioFile(fileItem);
                 
                 // Scroll into view
                 item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

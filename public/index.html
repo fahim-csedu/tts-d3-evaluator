@@ -161,11 +161,7 @@
                     <div class="annotation-area">
                         <div class="annotation-header">
                             <h3>Annotation</h3>
-                            <div class="annotation-actions">
-                                <button id="exportSession" class="btn-success" title="Export all validations from this session to Excel">📊 Export Session</button>
-                                <button id="copyAndSave" class="btn-primary" title="Copy current validation to clipboard">📋 Copy Data</button>
-                                <span id="annotationStatus" class="annotation-status"></span>
-                            </div>
+                            <span id="annotationStatus" class="annotation-status"></span>
                         </div>
                         
                         <!-- Quick Selection Controls -->
@@ -177,13 +173,22 @@
                                 </button>
                             </div>
                             <div class="custom-transcript-section">
-                                <label for="customTranscript">Or enter corrected transcript (if incorrect):</label>
+                                <label for="customTranscript">If given transcript is incorrect, add the correct transcript with proper punctuations:</label>
                                 <textarea id="customTranscript" rows="3" placeholder="Enter the correct transcript in Bengali..."></textarea>
-                                <button id="submitCustom" class="btn-submit" disabled>Submit Corrected Transcript</button>
+                            </div>
+                            <div class="punctuation-section">
+                                <label for="punctuationMissing">
+                                    <input type="checkbox" id="punctuationMissing" />
+                                    Punctuation missing between sentences
+                                </label>
                             </div>
                             <div class="notes-section">
                                 <label for="validationNotes">Notes (optional):</label>
                                 <textarea id="validationNotes" rows="2" placeholder="Add any notes about this validation (e.g., audio quality, pronunciation issues, etc.)"></textarea>
+                            </div>
+                            <div class="action-buttons">
+                                <button id="copyAndSave" class="btn-primary" title="Save validation and copy to clipboard">💾 Save and Copy</button>
+                                <button id="exportSession" class="btn-success" title="Export all validations from this session to Excel">📊 Export Session</button>
                             </div>
                             <div id="selectionFeedback" class="selection-feedback"></div>
                         </div>
