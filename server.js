@@ -885,14 +885,6 @@ app.get('/api/annotation/:filename', requireAuth, async (req, res) => {
             details: error.message
         });
     }
-    } catch (error) {
-        console.error('Error saving validation:', error);
-        console.error('Stack trace:', error.stack);
-        res.status(500).json({ 
-            error: 'Failed to save validation',
-            details: error.message
-        });
-    }
 });
 
 // Get a specific validation record by filename
