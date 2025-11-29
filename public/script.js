@@ -69,6 +69,7 @@ class AudioFileBrowser {
         this.clipList = []; // Array of clip filenames in order
         this.currentClipIndex = -1; // Current position in clip list
         this.validationStatus = new Map(); // Map of filename -> validation status
+        this.currentItems = []; // Current items in the file list for search functionality
         
         // Clear any saved paths from previous sessions
         localStorage.removeItem('audioFileBrowserLastPath');
@@ -629,38 +630,40 @@ class AudioFileBrowser {
     }
     
     handleSearch(query) {
-        if (!this.allFiles) return;
+        // Use currentItems for folder browsing mode
+        if (!this.currentItems || this.currentItems.length === 0) {
+            return;
+        }
         
         const searchTerm = query.toLowerCase().trim();
         
         if (searchTerm === '') {
-            // Show all files
-            this.renderCSVFileList(this.allFiles);
+            // Show all items
+            this.renderFileList(this.currentItems);
             return;
         }
         
-        // Filter files by filename
-        const filteredFiles = this.allFiles.filter(file => 
-            file.filename.toLowerCase().includes(searchTerm)
+        // Filter items by name
+        const filteredItems = this.currentItems.filter(item => 
+            item.name.toLowerCase().includes(searchTerm)
         );
         
         // Render filtered list
-        this.renderCSVFileList(filteredFiles);
+        this.renderFileList(filteredItems);
         
         // Update breadcrumb
-        if (filteredFiles.length === 0) {
-            this.breadcrumb.textContent = `No files match "${query}"`;
+        if (filteredItems.length === 0) {
+            this.breadcrumb.textContent = `No items match "${query}"`;
         } else {
-            this.breadcrumb.textContent = `Found ${filteredFiles.length} file(s) matching "${query}"`;
+            this.breadcrumb.textContent = `Found ${filteredItems.length} item(s) matching "${query}"`;
         }
     }
     
     clearSearch() {
         this.fileSearch.value = '';
-        if (this.allFiles) {
-            this.renderCSVFileList(this.allFiles);
-            this.currentPathSpan.textContent = `${this.allFiles.length} files`;
-            this.breadcrumb.textContent = `Loaded ${this.allFiles.length} files from CSV`;
+        // Reload current directory to restore full file list
+        if (this.currentPath !== undefined) {
+            this.loadDirectory(this.currentPath);
         }
     }
     
@@ -734,6 +737,9 @@ class AudioFileBrowser {
     }
     
     renderFileList(items) {
+        // Store current items for search functionality
+        this.currentItems = items;
+        
         if (items.length === 0) {
             this.fileList.innerHTML = '<div class="loading">No files found</div>';
             return;
@@ -770,7 +776,7 @@ class AudioFileBrowser {
             if (item.type === 'folder' && item.fileCount !== undefined) {
                 const count = document.createElement('span');
                 count.className = 'file-count';
-                count.textContent = `${item.fileCount} files`;
+                count.textContent = `${item.fileCount} items`;
                 name.appendChild(count);
             }
             

@@ -1,0 +1,79 @@
+{
+    "duration": 30.0,
+    "book_name": "Ban Manush - Abu Ishaq",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/Ban Manush - Abu Ishaq/2c08617f-2271-4f23-a4f7-d0bfb82706af.flac",
+    "speech_id": "2c08617f-2271-4f23-a4f7-d0bfb82706af",
+    "annotation": [
+        {
+            "tagList": [],
+            "start": 0,
+            "end": 1.35685714,
+            "id": "BfiNdVorVALADM",
+            "sentence": "এখান দিয়ে সরু পথ"
+        },
+        {
+            "tagList": [],
+            "start": 1.53057143,
+            "end": 4.40714286,
+            "id": "RyViBkwsVALADM",
+            "sentence": "গা বাঁচিয়ে একজন যেতে পারে কোনো মতে"
+        },
+        {
+            "tagList": [],
+            "start": 4.69857143,
+            "end": 8.85514286,
+            "id": "wavesurfer_eb9b5lap6a8VALADM",
+            "sentence": "মাঝপথে গিয়ে দেয়ালের সাথে পিঠ ঠেকিয়ে, দাঁড়াতে হয় আমাকে"
+        },
+        {
+            "tagList": [],
+            "start": 9.06828571,
+            "end": 12.158,
+            "id": "zMgqlenRVALADM",
+            "sentence": "একজন বুড়ো ভদ্রলোক আসছিলেন, ওদিক থেকে"
+        },
+        {
+            "tagList": [],
+            "start": 12.42828571,
+            "end": 14.98142857,
+            "id": "SQKEblVuVALADM",
+            "sentence": "দেহের আয়তন তার নিতান্ত ছোট নয়"
+        },
+        {
+            "tagList": [],
+            "start": 15.18714286,
+            "end": 17.62028571,
+            "id": "aXuUHcUvVALADM",
+            "sentence": "তাই কোলাকুলিটা হয়ে যায় ভালোভাবেই"
+        },
+        {
+            "tagList": [],
+            "start": 17.77742857,
+            "end": 21.14200009,
+            "id": "YUGmuTtXVALADM",
+            "sentence": "তারপর একজন, আরও এক, আরও একজন"
+        },
+        {
+            "tagList": [],
+            "start": 21.26028571,
+            "end": 23.17,
+            "id": "lBdIXcRHVALADM",
+            "sentence": "কোলাকুলি সেরে বেরিয়ে যান তারা"
+        },
+        {
+            "tagList": [],
+            "start": 23.28657143,
+            "end": 26.494,
+            "id": "FArxDGxHVALADM",
+            "sentence": "কোলাকুলিটা যদিও সকলের সাথে সমান জমে না"
+        },
+        {
+            "tagList": [],
+            "start": 26.60771429,
+            "end": 29.662,
+            "id": "EpRnjisCVALADM",
+            "sentence": "তবুও মনে হয়, মানুষে মানুষে হানাহানির"
+        }
+    ]
+}

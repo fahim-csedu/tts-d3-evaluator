@@ -1,0 +1,51 @@
+{
+    "duration": 22.674,
+    "book_name": "Ban Manush - Abu Ishaq",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/Ban Manush - Abu Ishaq/fa99f6e2-2c23-43df-a644-4236ffe5bce9.flac",
+    "speech_id": "fa99f6e2-2c23-43df-a644-4236ffe5bce9",
+    "annotation": [
+        {
+            "id": "LKbfyYbl",
+            "start": 0.02321995,
+            "end": 1.87501134,
+            "sentence": "চাকরি থেকে অবসর গ্রহণ করেন।",
+            "tagList": []
+        },
+        {
+            "id": "gUeHfwXi",
+            "start": 1.95628118,
+            "end": 4.59755102,
+            "sentence": "সাহিত্য সাধনায় তিনি স্বীয় বৈশিষ্ট্যের অধিকারী।",
+            "tagList": []
+        },
+        {
+            "id": "pNfLKrdj",
+            "start": 4.68462585,
+            "end": 9.81623583,
+            "sentence": "তিনি গ্রামবাংলার চিত্র এবং সেখানকার সমস্যা অত্যন্ত সার্থকতার সঙ্গে রূপায়িত করেছেন।",
+            "tagList": []
+        },
+        {
+            "id": "eDJdIhxB",
+            "start": 9.88589569,
+            "end": 17.03183673,
+            "sentence": "এদিক থেকে তার সূর্য দীঘল বাড়ি উপন্যাসটিকে বাস্তব জীবনের সার্থক চিত্রণের, উজ্জ্বল নিদর্শন হিসেবে বিবেচনা করা যায়।",
+            "tagList": []
+        },
+        {
+            "id": "dAWHQTXA",
+            "start": 17.14793651,
+            "end": 21.51909297,
+            "sentence": "সূর্য দীঘল বাড়ী উপন্যাসটি আমাদের সাহিত্যে একটি উল্লেখযোগ্য সংযোজন।",
+            "tagList": []
+        },
+        {
+            "id": "PjbQupvc",
+            "start": 21.58294785,
+            "end": 22.63945578,
+            "sentence": "উপন্যাস সাহিত্যে।",
+            "tagList": []
+        }
+    ]
+}

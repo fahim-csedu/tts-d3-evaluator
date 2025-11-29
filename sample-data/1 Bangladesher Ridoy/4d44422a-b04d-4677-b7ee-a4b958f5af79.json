@@ -1,0 +1,65 @@
+{
+    "duration": 24.613,
+    "book_name": "1 Bangladesher Ridoy",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/1 Bangladesher Ridoy/4d44422a-b04d-4677-b7ee-a4b958f5af79.flac",
+    "speech_id": "4d44422a-b04d-4677-b7ee-a4b958f5af79",
+    "annotation": [
+        {
+            "id": "bqoWHUSf",
+            "start": 0.09868481,
+            "end": 0.84752834,
+            "sentence": "দেখি রে।",
+            "tagList": []
+        },
+        {
+            "id": "WIbPePUj",
+            "start": 1.09133787,
+            "end": 4.31310658,
+            "sentence": "তোমার মুক্ত কেশের পুঞ্জ মেঘে, লুকায় অশনি।",
+            "tagList": []
+        },
+        {
+            "id": "iqFVSgtM",
+            "start": 4.54530612,
+            "end": 8.10376417,
+            "sentence": "তোমার আঁচল ঝড়ে, আকাশ তলে, রৌদ্র বশুনি।",
+            "tagList": []
+        },
+        {
+            "id": "oEGVZHzp",
+            "start": 8.3475737,
+            "end": 11.03528345,
+            "sentence": "ওগো মা, তোমায় দেখে দেখে আঁখি না ফিরে।",
+            "tagList": []
+        },
+        {
+            "id": "rThOqfnG",
+            "start": 11.27328798,
+            "end": 14.47183673,
+            "sentence": "তোমার দুয়ার আজি খুলে গেছে, সোনার মন্দিরে।",
+            "tagList": []
+        },
+        {
+            "id": "KvVbPfii",
+            "start": 14.65179138,
+            "end": 18.01287982,
+            "sentence": "যখন অনাদরে, চাইনি মুখে ভেবেছিলুম দুঃখিনী মা।",
+            "tagList": []
+        },
+        {
+            "id": "CeXyTDHk",
+            "start": 18.25668934,
+            "end": 21.98349206,
+            "sentence": "আছে ভাঙা ঘরে একলা পড়ে, দুঃখের বুঝি নাইকো সীমা।",
+            "tagList": []
+        },
+        {
+            "id": "VrHPoEOr",
+            "start": 22.19247166,
+            "end": 24.58993197,
+            "sentence": "কোথায় সে তোর দরিদ্র বেশ, কোথায়।",
+            "tagList": []
+        }
+    ]
+}

@@ -1,0 +1,74 @@
+{
+    "duration": 30.0,
+    "book_name": "Ban Manush - Abu Ishaq",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/Ban Manush - Abu Ishaq/330438bf-eaac-4d18-ad70-5e2b183366d5.flac",
+    "speech_id": "330438bf-eaac-4d18-ad70-5e2b183366d5",
+    "annotation": [
+        {
+            "tagList": [],
+            "start": 0.23,
+            "end": 1.42028571,
+            "id": "IuhxySOB",
+            "sentence": "মুখে তিনটে লোক"
+        },
+        {
+            "tagList": [],
+            "start": 1.66885714,
+            "end": 3.85628571,
+            "id": "IfAyujtV",
+            "sentence": "তাদের পোশাক দেখে চমকে উঠি"
+        },
+        {
+            "tagList": [],
+            "start": 4.06142857,
+            "end": 7.76371429,
+            "id": "zldIcBRW",
+            "sentence": "তাদের ভাবগতিকও কেমন যেন সুবিধের মনে হচ্ছে না"
+        },
+        {
+            "tagList": [
+                "BN"
+            ],
+            "start": 8.06542857,
+            "end": 11.13057143,
+            "id": "QvTkiVWX",
+            "sentence": "আমার বুকের ভেতরটা ঢিপঢিপ শুরু হয়েছে"
+        },
+        {
+            "tagList": [],
+            "start": 11.36828571,
+            "end": 13.23571429,
+            "id": "bRfWZRwG",
+            "sentence": "আশেপাশে লোকজন নেই"
+        },
+        {
+            "tagList": [],
+            "start": 13.41285714,
+            "end": 20.158,
+            "id": "jNyomHPV",
+            "sentence": "পেছনে তাকিয়ে দেখি এক অ্যাংলো ইন্ডিয়ান তরুণী উঁচু গোড়ালি জুতো পায়ে আসছে গটগট করে"
+        },
+        {
+            "tagList": [],
+            "start": 20.45971429,
+            "end": 23.17342857,
+            "id": "GzAJgRvY",
+            "sentence": "আমার মাথায় হঠাৎ একটা বুদ্ধি খেলে যায়"
+        },
+        {
+            "tagList": [],
+            "start": 23.258,
+            "end": 25.214,
+            "id": "LDPNyxWx",
+            "sentence": "আমি পেছন ফিরে দাঁড়িয়ে যাই"
+        },
+        {
+            "tagList": [],
+            "start": 25.49114286,
+            "end": 29.77142857,
+            "id": "xeQOpueD",
+            "sentence": "গলির মুখের লোকগুলোকে বোঝাতে চাই আমি তরুণীটির জন্যই অপেক্ষা"
+        }
+    ]
+}

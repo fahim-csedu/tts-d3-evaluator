@@ -1,0 +1,58 @@
+{
+    "duration": 17.067,
+    "book_name": "Ban Manush - Abu Ishaq",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/Ban Manush - Abu Ishaq/0c3b8f2e-1063-4370-9834-8da75b4ddfe8.flac",
+    "speech_id": "0c3b8f2e-1063-4370-9834-8da75b4ddfe8",
+    "annotation": [
+        {
+            "id": "eYryxeIL",
+            "start": 0.02321995,
+            "end": 1.43963719,
+            "sentence": "শব্দার্থ ও টিকা।",
+            "tagList": []
+        },
+        {
+            "id": "QmscVOIT",
+            "start": 1.50929705,
+            "end": 3.71519274,
+            "sentence": "হিংস্রালয় হিংস্র প্রাণীর বাসস্থান।",
+            "tagList": []
+        },
+        {
+            "id": "aQFrBLnm",
+            "start": 3.81968254,
+            "end": 5.30575964,
+            "sentence": "গলগ্রন্থি গলার বন্ধনী।",
+            "tagList": []
+        },
+        {
+            "id": "gIoJxRGH",
+            "start": 5.38702948,
+            "end": 8.13278912,
+            "sentence": "ছাটলা শ্যাওলা, দেয়ালে জমা পুরনো ময়লা।",
+            "tagList": []
+        },
+        {
+            "id": "jYPhHAmx",
+            "start": 8.20825397,
+            "end": 10.28063492,
+            "sentence": "একদিন, এতদিন শব্দের কথ্য রূপ।",
+            "tagList": []
+        },
+        {
+            "id": "dIVRKMxp",
+            "start": 10.33287982,
+            "end": 12.84063492,
+            "sentence": "ঠ্যারো, দাঁড়াও; ঠাওরালো মনে করল।",
+            "tagList": []
+        },
+        {
+            "id": "POfzvjhS",
+            "start": 12.92770975,
+            "end": 17.0492517,
+            "sentence": "চৌরঙ্গী, যার রাস্তার মিলনস্থল; কলকাতার একটি স্থানের নাম।",
+            "tagList": []
+        }
+    ]
+}

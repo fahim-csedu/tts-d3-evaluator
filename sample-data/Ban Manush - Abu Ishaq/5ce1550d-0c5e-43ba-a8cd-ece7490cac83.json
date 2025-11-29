@@ -1,0 +1,86 @@
+{
+    "duration": 24.079,
+    "book_name": "Ban Manush - Abu Ishaq",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/Ban Manush - Abu Ishaq/5ce1550d-0c5e-43ba-a8cd-ece7490cac83.flac",
+    "speech_id": "5ce1550d-0c5e-43ba-a8cd-ece7490cac83",
+    "annotation": [
+        {
+            "id": "hFoyjNxY",
+            "start": 0.02902494,
+            "end": 0.94621315,
+            "sentence": "অবাক করলে।",
+            "tagList": []
+        },
+        {
+            "id": "zOvbiUzi",
+            "start": 1.18421769,
+            "end": 3.83709751,
+            "sentence": "এক জোয়ান পুরুষ তাকে রক্ষা করবে মেয়ে মানুষ।",
+            "tagList": []
+        },
+        {
+            "id": "FLJWHoMR",
+            "start": 4.02285714,
+            "end": 5.31156463,
+            "sentence": "আচ্ছা কাপুরুষ তো!",
+            "tagList": []
+        },
+        {
+            "id": "qDIdxxxV",
+            "start": 5.52054422,
+            "end": 7.44780045,
+            "sentence": "অবজ্ঞার হাসি তরুণীটির মুখে।",
+            "tagList": []
+        },
+        {
+            "id": "JdTSaJOv",
+            "start": 7.65097506,
+            "end": 10.77405896,
+            "sentence": "কিছুদূর গিয়ে মহিলা বাঁ দিকে এক গলিতে ঢুকে পড়ে।",
+            "tagList": []
+        },
+        {
+            "id": "XgpInwex",
+            "start": 11.03528345,
+            "end": 12.45750567,
+            "sentence": "আমি মোড় নি ডান দিকে।",
+            "tagList": []
+        },
+        {
+            "id": "kkAmJKty",
+            "start": 12.67229025,
+            "end": 15.19165533,
+            "sentence": "পাশ থেকে একটা হাত এগিয়ে আসছেন আমার দিকে।",
+            "tagList": []
+        },
+        {
+            "id": "vZCeOXsE",
+            "start": 15.38321995,
+            "end": 15.870839,
+            "sentence": "উহ!",
+            "tagList": []
+        },
+        {
+            "id": "HZyuFpOq",
+            "start": 15.96371882,
+            "end": 18.85460317,
+            "sentence": "মাগো, বলে লাফ দিয়ে সরে যায় কয়েক হাত।",
+            "tagList": []
+        },
+        {
+            "id": "XazURTiW",
+            "start": 18.98231293,
+            "end": 22.63365079,
+            "sentence": "ফিরে দেখি একজন জটাধারি ফকির হাসছে আমার অবস্থা দেখে।",
+            "tagList": []
+        },
+        {
+            "id": "RXCZAgaq",
+            "start": 22.86004535,
+            "end": 24.05006803,
+            "sentence": "এগিয়ে এসে সে বলে।",
+            "tagList": []
+        }
+    ]
+}

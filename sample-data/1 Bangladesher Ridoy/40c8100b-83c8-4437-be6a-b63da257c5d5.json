@@ -1,0 +1,58 @@
+{
+    "duration": 30.0,
+    "book_name": "1 Bangladesher Ridoy",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/1 Bangladesher Ridoy/40c8100b-83c8-4437-be6a-b63da257c5d5.flac",
+    "speech_id": "40c8100b-83c8-4437-be6a-b63da257c5d5",
+    "annotation": [
+        {
+            "tagList": [],
+            "start": 0.098,
+            "end": 2.39857143,
+            "id": "wavesurfer_mv5uvn1605g",
+            "sentence": "অশুনি, বাজ, বর্জ্র"
+        },
+        {
+            "tagList": [],
+            "start": 2.914,
+            "end": 5.726,
+            "id": "UreYENKy",
+            "sentence": "মুক্তাকেশের পুঞ্জ মেঘে লুকায় অশনি"
+        },
+        {
+            "tagList": [],
+            "start": 6.12428571,
+            "end": 8.83,
+            "id": "cObpANDF",
+            "sentence": "খোলা কালো চুলের মধ্যে বাজ লুকিয়ে যায়"
+        },
+        {
+            "tagList": [],
+            "start": 9.346,
+            "end": 10.366,
+            "id": "EMJumeOO",
+            "sentence": "রৌদ্র বসনি"
+        },
+        {
+            "tagList": [],
+            "start": 10.978,
+            "end": 17.63,
+            "id": "wavesurfer_ubk23acjro",
+            "sentence": "@রৌদ্রুক@ পোশাক পরা- রোদের পোশাক অর্থাৎ উজ্জ্বল বেশ; অনাদরে অযত্নে উপেক্ষায়"
+        },
+        {
+            "tagList": [],
+            "start": 18.114,
+            "end": 28.894,
+            "id": "wavesurfer_uimb2ooundo",
+            "sentence": "মলিন- উজ্জ্বল নয় এমন; ময়লাযুক্ত, বিষণ্ন ও ম্লান; দীপ্তিরাশি- আলোর ছটা; হৃদয় হরোণি মনকে বশীভূত করে এমন"
+        },
+        {
+            "tagList": [],
+            "start": 29.20314286,
+            "end": 29.71428571,
+            "id": "rhFOXhRg",
+            "sentence": "অভয়"
+        }
+    ]
+}

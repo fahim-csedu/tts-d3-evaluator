@@ -1,0 +1,98 @@
+{
+    "duration": 30.0,
+    "book_name": "Ban Manush - Abu Ishaq",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/Ban Manush - Abu Ishaq/d3f722b6-15b9-41e8-ae25-b11938c8f2bc.flac",
+    "speech_id": "d3f722b6-15b9-41e8-ae25-b11938c8f2bc",
+    "annotation": [
+        {
+            "tagList": [],
+            "start": 0.13,
+            "end": 1.10771429,
+            "id": "RaiuGCFJ",
+            "sentence": "গেছিলো কোর্টে"
+        },
+        {
+            "tagList": [
+                "OS"
+            ],
+            "start": 1.346,
+            "end": 4.35,
+            "id": "urqjeqCg",
+            "sentence": "রুমাল বের করে ঝেড়ে আমার পথ দেখি আমি"
+        },
+        {
+            "tagList": [
+                "OS"
+            ],
+            "start": 4.77,
+            "end": 6.238,
+            "id": "FBdWIYdx",
+            "sentence": "এবার আর সোজা পথে নয়"
+        },
+        {
+            "tagList": [
+                "OS"
+            ],
+            "start": 6.49057143,
+            "end": 8.734,
+            "id": "yVMFcIxF",
+            "sentence": "সোজা পথটাই দেখছি কঠিন বেশি"
+        },
+        {
+            "tagList": [
+                "OS"
+            ],
+            "start": 9.09685714,
+            "end": 15.326,
+            "id": "wavesurfer_t4s31ckqch",
+            "sentence": "বেনে পুকুর লেন ঘুরে লোয়ার সার্কুলার রোড, পার হয়ে, ইলিয়ট রোডের মোড়ে এসে দাঁড়াই"
+        },
+        {
+            "tagList": [
+                "OS"
+            ],
+            "start": 15.63514286,
+            "end": 17.982,
+            "id": "MtjeYmUN",
+            "sentence": "ধর্মঘটের জন্য ট্রাম বন্ধ"
+        },
+        {
+            "tagList": [],
+            "start": 18.22371429,
+            "end": 20.446,
+            "id": "vOyZAcaD",
+            "sentence": "আমাকে যেতে হবে আট নম্বর বাসে"
+        },
+        {
+            "tagList": [],
+            "start": 20.78371429,
+            "end": 22.942,
+            "id": "AxToaBMQ",
+            "sentence": "একেক করে কয়েকটা বাস চলে যায়"
+        },
+        {
+            "tagList": [
+                "OS"
+            ],
+            "start": 23.20142857,
+            "end": 25.662,
+            "id": "uXPnBTBi",
+            "sentence": "কতবার হাতল ধরতে গিয়ে পিছিয়ে যাই"
+        },
+        {
+            "tagList": [],
+            "start": 25.82885714,
+            "end": 27.198,
+            "id": "BMSPmMLM",
+            "sentence": "সাহসে কুলোয় না"
+        },
+        {
+            "tagList": [],
+            "start": 27.582,
+            "end": 29.854,
+            "id": "APliQaBH",
+            "sentence": "লোক সব বাদুড় ঝোলা হয়ে যাচ্ছে"
+        }
+    ]
+}

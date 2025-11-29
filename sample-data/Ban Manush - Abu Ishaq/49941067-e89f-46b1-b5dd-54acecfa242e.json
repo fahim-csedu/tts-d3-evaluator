@@ -1,0 +1,58 @@
+{
+    "duration": 30.0,
+    "book_name": "Ban Manush - Abu Ishaq",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/Ban Manush - Abu Ishaq/49941067-e89f-46b1-b5dd-54acecfa242e.flac",
+    "speech_id": "49941067-e89f-46b1-b5dd-54acecfa242e",
+    "annotation": [
+        {
+            "tagList": [],
+            "start": 0.13628571,
+            "end": 1.57685714,
+            "id": "uGotRODl",
+            "sentence": "পাঠ পরিচিতি"
+        },
+        {
+            "tagList": [],
+            "start": 1.82142857,
+            "end": 8.46428571,
+            "id": "yqUHIRlH",
+            "sentence": "ভারত বিভাগের আগে উনিশশো ছেচল্লিশ সালে এ অঞ্চলে ভয়াবহ হিন্দু মুসলমান দাঙ্গা হয়েছিল"
+        },
+        {
+            "tagList": [],
+            "start": 8.65571429,
+            "end": 13.24314286,
+            "id": "bxvXRiXA",
+            "sentence": "এ সাম্প্রদায়িক দাঙ্গার পটভূমিতে বনমানুষ গল্পটি লিখিত"
+        },
+        {
+            "tagList": [],
+            "start": 13.36314286,
+            "end": 17.65171429,
+            "id": "EJcdxNse",
+            "sentence": "এ গল্পের লেখক বন বিভাগে সামান্য বেতনে চাকরি করতেন"
+        },
+        {
+            "tagList": [],
+            "start": 17.70771429,
+            "end": 20.88028571,
+            "id": "YCRpznPK",
+            "sentence": "তিনি দ্বিগুণ বেতনে কলকাতায় চাকরি করতে আসেন"
+        },
+        {
+            "tagList": [],
+            "start": 20.99685714,
+            "end": 25.31057143,
+            "id": "xbNxzmyj",
+            "sentence": "কলকাতায় এসে প্রথমে তার নিজেকে সভ্য মানুষ মনে হতে থাকে"
+        },
+        {
+            "tagList": [],
+            "start": 25.338,
+            "end": 29.72657143,
+            "id": "UODLTjbj",
+            "sentence": "কিন্তু তিনি তখন সাম্প্রদায়িক হানাহানির মুখোমুখি হতে থাকেন"
+        }
+    ]
+}

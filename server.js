@@ -115,6 +115,9 @@ function requireAuth(req, res, next) {
     if (!sessionId || !sessions.has(sessionId)) {
         return res.status(401).json({ error: 'Authentication required' });
     }
+    // Attach user info to request for use in endpoints
+    const session = sessions.get(sessionId);
+    req.user = session ? { username: session.username } : null;
     next();
 }
 
@@ -266,19 +269,19 @@ app.get('/api/browse', requireAuth, (req, res) => {
             if (item.isDirectory()) {
                 const itemPath = normalizePath(relativePath ? `${relativePath}/${item.name}` : item.name);
                 const dirFullPath = path.join(fullPath, item.name);
-                let fileCount = 0;
+                let itemCount = 0;
                 try {
                     const dirItems = fs.readdirSync(dirFullPath, { withFileTypes: true });
-                    // Count FLAC files for TTS data
-                    fileCount = dirItems.filter(dirItem => dirItem.isFile() && dirItem.name.match(/\.flac$/i)).length;
+                    // Count all items (files + folders) in the directory, not nested
+                    itemCount = dirItems.length;
                 } catch (error) {
-                    fileCount = 0;
+                    itemCount = 0;
                 }
                 result.items.push({
                     name: item.name,
                     type: 'folder',
                     path: itemPath,
-                    fileCount: fileCount
+                    fileCount: itemCount
                 });
             } else {
                 // Show FLAC files (TTS audio format)
@@ -437,6 +440,9 @@ app.post('/api/annotation', requireAuth, async (req, res) => {
         const annotationFilename = `${audioFileName}.json`;
         const annotationPath = path.join(ANNOTATIONS_DIR, annotationFilename);
         
+        // Get username from session
+        const username = req.user ? req.user.username : 'unknown';
+        
         // Prepare annotation data with all fields
         const annotation = {
             absolute_path: annotationData.absolutePath,
@@ -446,6 +452,7 @@ app.post('/api/annotation', requireAuth, async (req, res) => {
             punctuation_missing: annotationData.punctuationMissing,
             duration: annotationData.duration,
             notes: annotationData.notes,
+            annotator: username,
             timestamp: annotationData.timestamp || new Date().toISOString()
         };
         
@@ -801,57 +808,6 @@ app.post('/api/validation', (req, res) => {
         console.error('Stack trace:', error.stack);
         res.status(500).json({ 
             error: 'Failed to save validation',
-            details: error.message
-        });
-    }
-});
-
-// Save annotation data to individual JSON file
-app.post('/api/annotation', requireAuth, async (req, res) => {
-    try {
-        const annotationData = req.body;
-        
-        if (!annotationData.filename || !annotationData.absolutePath) {
-            return res.status(400).json({ 
-                error: 'Filename and absolute path are required' 
-            });
-        }
-        
-        // Ensure annotations directory exists
-        if (!fs.existsSync(ANNOTATIONS_DIR)) {
-            fs.mkdirSync(ANNOTATIONS_DIR, { recursive: true });
-        }
-        
-        // Extract base filename from absolute path or use provided filename
-        const audioFileName = path.basename(annotationData.absolutePath, path.extname(annotationData.absolutePath));
-        const annotationFilename = `${audioFileName}.json`;
-        const annotationPath = path.join(ANNOTATIONS_DIR, annotationFilename);
-        
-        // Prepare annotation data with all fields
-        const annotation = {
-            absolute_path: annotationData.absolutePath,
-            original_transcript: annotationData.originalTranscript,
-            corrected_transcript: annotationData.correctedTranscript,
-            is_transcript_correct: annotationData.isTranscriptCorrect,
-            punctuation_missing: annotationData.punctuationMissing,
-            duration: annotationData.duration,
-            notes: annotationData.notes,
-            timestamp: annotationData.timestamp || new Date().toISOString()
-        };
-        
-        // Save to JSON file
-        fs.writeFileSync(annotationPath, JSON.stringify(annotation, null, 2), 'utf-8');
-        
-        console.log(`Annotation saved to ${annotationPath}`);
-        res.json({ 
-            success: true, 
-            message: 'Annotation saved successfully',
-            path: annotationPath
-        });
-    } catch (error) {
-        console.error('Error saving annotation:', error);
-        res.status(500).json({ 
-            error: 'Failed to save annotation',
             details: error.message
         });
     }

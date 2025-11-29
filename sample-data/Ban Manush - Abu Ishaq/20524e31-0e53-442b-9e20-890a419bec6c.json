@@ -1,0 +1,65 @@
+{
+    "duration": 30.0,
+    "book_name": "Ban Manush - Abu Ishaq",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/Ban Manush - Abu Ishaq/20524e31-0e53-442b-9e20-890a419bec6c.flac",
+    "speech_id": "20524e31-0e53-442b-9e20-890a419bec6c",
+    "annotation": [
+        {
+            "tagList": [],
+            "start": 0.18657143,
+            "end": 1.88314286,
+            "id": "ZDbMIQQY",
+            "sentence": "পৃষ্ঠা একশো আট"
+        },
+        {
+            "tagList": [],
+            "start": 2.11342857,
+            "end": 3.358,
+            "id": "TKbqzpxh",
+            "sentence": "বন মানুষ"
+        },
+        {
+            "tagList": [],
+            "start": 3.50714286,
+            "end": 4.702,
+            "id": "UYxrrzaN",
+            "sentence": "আবু ইসহাক"
+        },
+        {
+            "tagList": [],
+            "start": 5.19285714,
+            "end": 6.74371429,
+            "id": "lUSscHqX",
+            "sentence": "লেখক পরিচিতি"
+        },
+        {
+            "tagList": [],
+            "start": 7.25457143,
+            "end": 14.466,
+            "id": "ZVfRbyxl",
+            "sentence": "আবু ইসহাক উনিশশো ছাব্বিশ সালের পহেলা নভেম্বর শরীয়তপুর জেলার শিরঙ্গল গ্রামে জন্মগ্রহণ করেন"
+        },
+        {
+            "tagList": [],
+            "start": 14.56485714,
+            "end": 22.89285714,
+            "id": "azVFxPsc",
+            "sentence": "তিনি উনিশশো বিয়াল্লিশ সালে ম্যাট্রিক ও উনিশশো চুয়াল্লিশ সালে আইএ পাস করার পরই সরকারি চাকরিতে প্রবেশ করেন"
+        },
+        {
+            "tagList": [],
+            "start": 22.938,
+            "end": 28.16542857,
+            "id": "zwqhELzT",
+            "sentence": "উনিশশো ষাট সালে তিনি করাচী বিশ্ববিদ্যালয় থেকে বিএ পরীক্ষায় উত্তীর্ণ হন"
+        },
+        {
+            "tagList": [],
+            "start": 28.35685714,
+            "end": 29.886,
+            "id": "yNmJlCpx",
+            "sentence": "উনিশশো তিরাশি সালে"
+        }
+    ]
+}

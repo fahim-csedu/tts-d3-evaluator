@@ -1,0 +1,72 @@
+{
+    "duration": 30.0,
+    "book_name": "Ban Manush - Abu Ishaq",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/Ban Manush - Abu Ishaq/1e7ea0ce-8a48-41a3-9e9c-aa6cb2a756b4.flac",
+    "speech_id": "1e7ea0ce-8a48-41a3-9e9c-aa6cb2a756b4",
+    "annotation": [
+        {
+            "tagList": [],
+            "start": 0.126,
+            "end": 3.006,
+            "id": "oSiMIjzU",
+            "sentence": "নীরা হবার পাত্র আমি নই, দাঁড়িয়ে থাকি"
+        },
+        {
+            "tagList": [],
+            "start": 3.13742857,
+            "end": 7.102,
+            "id": "weBqmPhC",
+            "sentence": "দেখি, অন্তত একটা পা রাখবার জায়গাও যদি মিলে যায়"
+        },
+        {
+            "tagList": [],
+            "start": 7.43628571,
+            "end": 9.04371429,
+            "id": "GIUpWiPz",
+            "sentence": "একটা বাস এসে থামে"
+        },
+        {
+            "tagList": [],
+            "start": 9.114,
+            "end": 14.59742857,
+            "id": "jXxwRxaj",
+            "sentence": "পা রাখবার জায়গা নেই, তবুও সব লোক ছুটোছুটি করছে কে কার আগে উঠবে"
+        },
+        {
+            "tagList": [],
+            "start": 14.79571429,
+            "end": 17.762,
+            "id": "gXiGxXwI",
+            "sentence": "চাকরি ঠিক রাখার কী প্রাণান্ত চেষ্টা"
+        },
+        {
+            "tagList": [],
+            "start": 18.00314286,
+            "end": 20.85171429,
+            "id": "hbYZudQf",
+            "sentence": "একটা লোক নেমে যায় ড্রাইভার এর কুঠুরি থেকে"
+        },
+        {
+            "tagList": [],
+            "start": 21.05742857,
+            "end": 25.406,
+            "id": "etVrddyg",
+            "sentence": "মহাসুযোগ, পাশের কয়েকজনকে টেক্কা মেরে চট করে উঠে পড়ি আমি"
+        },
+        {
+            "tagList": [],
+            "start": 25.694,
+            "end": 27.262,
+            "id": "ZRsPOyyP",
+            "sentence": "চাকরি গেলে আমার চলবে না"
+        },
+        {
+            "tagList": [],
+            "start": 27.59628571,
+            "end": 29.71428571,
+            "id": "BaFroIhP",
+            "sentence": "হঠাৎ আমার বুকে ধাক্কা মেরে"
+        }
+    ]
+}

@@ -1,0 +1,66 @@
+{
+    "duration": 30.0,
+    "book_name": "Ban Manush - Abu Ishaq",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/Ban Manush - Abu Ishaq/cf0d5bae-77d1-4f05-87a8-681286a044d3.flac",
+    "speech_id": "cf0d5bae-77d1-4f05-87a8-681286a044d3",
+    "annotation": [
+        {
+            "tagList": [
+                "OS"
+            ],
+            "start": 0.87628571,
+            "end": 5.822,
+            "id": "wavesurfer_fq44i2dpe5g",
+            "sentence": "এক একজন লোক চলে যায় পাশ কেটে, মনে হয় এক একটা ভাড়া কেটে যায় আমার"
+        },
+        {
+            "tagList": [],
+            "start": 6.274,
+            "end": 9.982,
+            "id": "XnRsEwSa",
+            "sentence": "আমার সতর্ক চোখ দুটো আড় চোখে তাকায় সবার দিকে"
+        },
+        {
+            "tagList": [],
+            "start": 10.306,
+            "end": 13.918,
+            "id": "wavesurfer_0p0gmqmsegg",
+            "sentence": "কিন্তু তারাও যে সতর্ক দৃষ্টি মেলে, আমার দিকে তাকায়!"
+        },
+        {
+            "tagList": [
+                "OS"
+            ],
+            "start": 14.21285714,
+            "end": 17.214,
+            "id": "pwLgwdJm",
+            "sentence": "আমাকে আমার হাত দুটুকেই বোধ হয় তাদের ভয়"
+        },
+        {
+            "tagList": [
+                "OS"
+            ],
+            "start": 17.634,
+            "end": 20.83,
+            "id": "xgLQslwf",
+            "sentence": "তাদের ভীত চাউনি দেখে অনুমান #করতে# কষ্ট হয় না"
+        },
+        {
+            "tagList": [
+                "OS"
+            ],
+            "start": 21.218,
+            "end": 26.206,
+            "id": "QUwbsbwF",
+            "sentence": "আমিও আমার অনুগত হাত দুটো ছাড়া, আর কারো হাতকে বিশ্বাস করতে পারি না"
+        },
+        {
+            "tagList": [],
+            "start": 26.92085714,
+            "end": 29.662,
+            "id": "AOZlJxfy",
+            "sentence": "কিছুদূর আগে ডান দিকে একটা পাশ গোলি"
+        }
+    ]
+}

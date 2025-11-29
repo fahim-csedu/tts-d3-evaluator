@@ -1,0 +1,44 @@
+{
+    "duration": 30.0,
+    "book_name": "Ban Manush - Abu Ishaq",
+    "source": "TalkingBook",
+    "path": "collect/TalkingBook/Ban Manush - Abu Ishaq/e3955af6-eec9-4a7e-bec3-ca399469893f.flac",
+    "speech_id": "e3955af6-eec9-4a7e-bec3-ca399469893f",
+    "annotation": [
+        {
+            "tagList": [],
+            "start": 0.162,
+            "end": 5.694,
+            "id": "OJDJkOLZ",
+            "sentence": "দেখেন এ শহরের মানুষেরা ধর্মের নামে পরস্পরকে নির্মমভাবে হত্যা করছে"
+        },
+        {
+            "tagList": [],
+            "start": 6.04942857,
+            "end": 9.726,
+            "id": "vYJuqVna",
+            "sentence": "বনের পশুপাখিরাও এরকম পরস্পরকে হত্যা করে না"
+        },
+        {
+            "tagList": [],
+            "start": 10.00657143,
+            "end": 14.56942857,
+            "id": "wJFqzdDG",
+            "sentence": "তখন লেখক আবার বন বিভাগের চাকরিতে ফিরে যাওয়ার সিদ্ধান্ত নেন"
+        },
+        {
+            "tagList": [],
+            "start": 14.63228571,
+            "end": 23.12371429,
+            "id": "sipYnzIE",
+            "sentence": "লেখকের কাছে এ শহরের সভ্য মানুষের চেয়ে বনে বসবাসকারী অশিক্ষিত মূর্খ মানুষকে অধিক গ্রহণযোগ্য মনে হয়"
+        },
+        {
+            "tagList": [],
+            "start": 23.44714286,
+            "end": 30.0,
+            "id": "IGIkeRXy",
+            "sentence": "এ গল্পের ভেতর দিয়ে সাম্প্রদায়িক ভেদ বুদ্ধির বিরুদ্ধে, লেখকের তীব্র ঘৃণা প্রকাশ"
+        }
+    ]
+}
