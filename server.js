@@ -299,12 +299,21 @@ app.get('/api/browse', requireAuth, (req, res) => {
             const audioPath = normalizePath(relativePath ? `${relativePath}/${audioFile}` : audioFile);
             const jsonPath = matchingJson ? normalizePath(relativePath ? `${relativePath}/${matchingJson}` : matchingJson) : null;
 
+            // Check if annotation exists for this file
+            let isAnnotated = false;
+            if (ANNOTATIONS_DIR) {
+                const annotationFilename = `${baseName}.json`;
+                const annotationPath = path.join(ANNOTATIONS_DIR, annotationFilename);
+                isAnnotated = fs.existsSync(annotationPath);
+            }
+
             result.items.push({
                 name: baseName,
                 type: 'audio',
                 audioFile: audioPath,
                 jsonFile: jsonPath,
-                path: audioPath
+                path: audioPath,
+                isAnnotated: isAnnotated
             });
         });
 

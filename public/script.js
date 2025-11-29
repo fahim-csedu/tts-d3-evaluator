@@ -438,6 +438,11 @@ class AudioFileBrowser {
             this.copyAndSaveBtn.textContent = '✓ Saved & Copied!';
             this.copyAndSaveBtn.style.background = '#218838';
             
+            // Refresh file list to show checkmark for annotated file
+            if (this.currentPath !== undefined) {
+                this.loadDirectory(this.currentPath);
+            }
+            
             setTimeout(() => {
                 this.copyAndSaveBtn.textContent = originalText;
                 this.copyAndSaveBtn.style.background = '';
@@ -778,6 +783,15 @@ class AudioFileBrowser {
                 count.className = 'file-count';
                 count.textContent = `${item.fileCount} items`;
                 name.appendChild(count);
+            }
+            
+            // Add checkmark for annotated audio files
+            if (item.type === 'audio' && item.isAnnotated) {
+                const checkmark = document.createElement('span');
+                checkmark.className = 'annotation-checkmark';
+                checkmark.textContent = '✓';
+                checkmark.title = 'Annotated';
+                name.appendChild(checkmark);
             }
             
             fileItem.appendChild(serial);
