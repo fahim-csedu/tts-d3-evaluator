@@ -272,8 +272,10 @@ app.get('/api/browse', requireAuth, (req, res) => {
                 let itemCount = 0;
                 try {
                     const dirItems = fs.readdirSync(dirFullPath, { withFileTypes: true });
-                    // Count all items (files + folders) in the directory, not nested
-                    itemCount = dirItems.length;
+                    // Count only .flac files in the directory
+                    itemCount = dirItems.filter(dirItem => 
+                        dirItem.isFile() && dirItem.name.match(/\.flac$/i)
+                    ).length;
                 } catch (error) {
                     itemCount = 0;
                 }
