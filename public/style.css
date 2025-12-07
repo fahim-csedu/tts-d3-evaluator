@@ -389,6 +389,50 @@ main {
     color: #b02a37;
 }
 
+.sampling-ribbon {
+    padding: 10px 20px;
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    overflow-x: auto;
+}
+
+.sampling-ribbon-table {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(90px, 1fr));
+    gap: 6px;
+}
+
+.sampling-ribbon .bucket-cell {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 6px 8px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.sampling-ribbon .bucket-cell .label {
+    display: block;
+    font-weight: 700;
+    color: #374151;
+}
+
+.sampling-ribbon .bucket-cell .counts {
+    display: block;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.sampling-ribbon .bucket-cell.complete {
+    border-color: #ccebd7;
+    background: #e9f7f0;
+}
+
+.sampling-ribbon .bucket-cell.over {
+    border-color: #f5c2c7;
+    background: #fdecea;
+}
 .transcript-area {
     display: flex;
     flex-direction: column;

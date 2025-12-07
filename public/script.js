@@ -146,6 +146,7 @@ class AudioFileBrowser {
         // Sampling progress UI
         this.bucketSummary = document.getElementById('bucketSummary');
         this.samplingBadge = document.getElementById('samplingBadge');
+        this.samplingRibbon = document.getElementById('samplingRibbon');
 
         // Sampling progress data
         this.samplingProgress = null;
@@ -1779,15 +1780,39 @@ class AudioFileBrowser {
         this.samplingBadge.textContent = remainingText;
     }
 
+    renderSamplingRibbon(info) {
+        if (!this.samplingRibbon) return;
+        if (!info || !this.samplingBuckets.length) {
+            this.samplingRibbon.innerHTML = '';
+            return;
+        }
+        const cells = this.samplingBuckets.map(label => {
+            const target = info.targets[label] || 0;
+            const actual = info.buckets[label] || 0;
+            const isComplete = target > 0 && actual >= target;
+            const isOver = target > 0 && actual > target * 1.1;
+            const cls = isOver ? 'over' : isComplete ? 'complete' : '';
+            return `
+                <div class="bucket-cell ${cls}">
+                    <span class="label">${label}</span>
+                    <span class="counts">${actual} / ${target}</span>
+                </div>
+            `;
+        }).join('');
+        this.samplingRibbon.innerHTML = `<div class="sampling-ribbon-table">${cells}</div>`;
+    }
+
     updateSamplingUI(pathKey) {
         if (!this.samplingProgress || !pathKey) {
             this.renderBucketSummary(null);
             this.renderSamplingBadge(null);
+            this.renderSamplingRibbon(null);
             return;
         }
         const info = this.samplingProgress[pathKey];
         this.renderBucketSummary(info);
         this.renderSamplingBadge(info);
+        this.renderSamplingRibbon(info);
     }
     
 
