@@ -1351,8 +1351,12 @@ main {
 .rating-buttons button[data-value="5"] { background: #d4f8e8; border-color: #1abc9c; color: #0f7f66; }
 
 .rating-buttons button.active {
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
-    transform: translateY(-1px);
+    border-width: 2px;
+    border-color: #333;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.28);
+    transform: translateY(-2px) scale(1.02);
+    color: #111;
+    font-weight: 800;
 }
 
 .rating-buttons button:hover {
