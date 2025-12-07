@@ -424,12 +424,13 @@ class AudioFileBrowser {
                 return;
             }
             
-            // Construct absolute path: D:\TTS D3\TTS D3 Data\collect\{relativePath}
-            // Convert forward slashes to backslashes for Windows path
-            const baseDir = 'D:\\TTS D3\\TTS D3 Data\\collect';
-            const absolutePath = filePath 
-                ? `${baseDir}\\${filePath.replace(/\//g, '\\')}`
-                : `${baseDir}\\${filename}`;
+            // Construct absolute path rooted at dataset base (avoid duplicate folder prefixes)
+            const baseDir = 'D:\\TTS D3\\TTS D3 Data';
+            const cleanedPath = (filePath || filename || '')
+                .replace(/^[\\/]+/, '')
+                .replace(/^(collect|create)[\\/]+/i, '$1\\') // keep top-level folder once
+                .replace(/\//g, '\\');
+            const absolutePath = `${baseDir}\\${cleanedPath}`;
             
             // Check if user has entered custom transcript but hasn't selected it
             const customText = this.customTranscriptInput?.value?.trim() || '';
