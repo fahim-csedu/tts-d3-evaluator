@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const ValidationStorage = require('./validationStorage');
 const ExcelExportService = require('./excelExport');
+const ExcelJS = require('exceljs');
 
 // Load configuration
 let config;
@@ -16,6 +17,20 @@ try {
 
 const app = express();
 const { AUDIO_BASE_DIR, TRANSCRIPTION_DIR, ANNOTATIONS_DIR, PORT, SESSION_TIMEOUT, DEBUG } = config;
+const SAMPLING_FILE = path.join(__dirname, 'audio_distribution_analysis.xlsx');
+const CREATE_STRUCTURE_FILE = path.join(__dirname, 'create_structure.json');
+const COLLECT_STRUCTURE_FILE = path.join(__dirname, 'collect_structure.json');
+
+const BUCKETS = [
+    { label: '[0,1)', min: 0, max: 1 },
+    { label: '[1,5)', min: 1, max: 5 },
+    { label: '[5,10)', min: 5, max: 10 },
+    { label: '[10,15)', min: 10, max: 15 },
+    { label: '[15,20)', min: 15, max: 20 },
+    { label: '[20,25)', min: 20, max: 25 },
+    { label: '[25,30)', min: 25, max: 30 },
+    { label: '[30+)', min: 30, max: Infinity }
+];
 
 // Trust proxy for Cloudflare tunnel
 app.set('trust proxy', true);
@@ -38,6 +53,159 @@ app.use((req, res, next) => {
 // Initialize validation storage
 const validationStoragePath = path.join(__dirname, 'validations.json');
 const validationStorage = new ValidationStorage(validationStoragePath);
+let samplingProgress = null;
+
+function normalizeToForwardSlash(p) {
+    return p.replace(/\\/g, '/');
+}
+
+function emptyBucketCounts() {
+    const counts = {};
+    BUCKETS.forEach(b => counts[b.label] = 0);
+    return counts;
+}
+
+function bucketLabelForDuration(seconds) {
+    const s = Number(seconds);
+    if (!Number.isFinite(s) || s < 0) return null;
+    const bucket = BUCKETS.find(b => s >= b.min && s < b.max);
+    return bucket ? bucket.label : null;
+}
+
+function mergeCounts(target, source) {
+    BUCKETS.forEach(b => {
+        target[b.label] = (target[b.label] || 0) + (source[b.label] || 0);
+    });
+}
+
+function loadSamplingTargets() {
+    const targets = {};
+    if (!fs.existsSync(SAMPLING_FILE)) {
+        console.warn('Sampling targets file not found:', SAMPLING_FILE);
+        return targets;
+    }
+    const workbook = new ExcelJS.Workbook();
+    return workbook.xlsx.readFile(SAMPLING_FILE).then(() => {
+        const sheets = [
+            { name: 'create-sampling', key: 'group' },
+            { name: 'collect-sampling', key: 'Folder' }
+        ];
+        sheets.forEach(sheetInfo => {
+            const sheet = workbook.getWorksheet(sheetInfo.name);
+            if (!sheet) return;
+            const header = sheet.getRow(1).values;
+            const bucketCols = {};
+            header.forEach((val, idx) => {
+                if (typeof val === 'string' && val.startsWith('Samples')) {
+                    const match = val.match(/\[(.*)\)/);
+                    const label = match ? `[${match[1]})` : val.replace('Samples ', '');
+                    bucketCols[idx] = label;
+                }
+            });
+            sheet.eachRow((row, rowNumber) => {
+                if (rowNumber === 1) return;
+                const folder = row.getCell(sheetInfo.key).value;
+                if (!folder) return;
+                const entry = emptyBucketCounts();
+                Object.entries(bucketCols).forEach(([idx, label]) => {
+                    const v = Number(row.getCell(Number(idx)).value || 0);
+                    entry[label] = v;
+                });
+                targets[normalizeToForwardSlash(folder)] = entry;
+            });
+        });
+        return targets;
+    }).catch(err => {
+        console.error('Failed to load sampling targets:', err);
+        return targets;
+    });
+}
+
+function flattenCounts(structure, baseLabel) {
+    const map = {};
+    function helper(node, rel) {
+        const counts = emptyBucketCounts();
+        if (Array.isArray(node.flac_files)) {
+            node.flac_files.forEach(f => {
+                const label = bucketLabelForDuration(f.duration_seconds);
+                if (label) counts[label] += 1;
+            });
+        }
+        if (Array.isArray(node.subdirectories)) {
+            node.subdirectories.forEach(sub => {
+                const childRel = rel ? `${rel}/${sub.name}` : sub.name;
+                const childCounts = helper(sub, childRel);
+                mergeCounts(counts, childCounts);
+            });
+        }
+        const key = rel ? `${baseLabel}/${rel}` : baseLabel;
+        map[normalizeToForwardSlash(key)] = counts;
+        return counts;
+    }
+    helper(structure, '');
+    return map;
+}
+
+function loadSamplingActuals() {
+    const actuals = {};
+    const files = [
+        { path: COLLECT_STRUCTURE_FILE, base: 'collect' },
+        { path: CREATE_STRUCTURE_FILE, base: 'create' }
+    ];
+    files.forEach(fileInfo => {
+        if (!fs.existsSync(fileInfo.path)) {
+            console.warn('Structure file not found:', fileInfo.path);
+            return;
+        }
+        try {
+            const content = fs.readFileSync(fileInfo.path, 'utf-8');
+            const structure = JSON.parse(content);
+            const map = flattenCounts(structure, fileInfo.base);
+            Object.assign(actuals, map);
+        } catch (err) {
+            console.error('Failed to parse structure file', fileInfo.path, err);
+        }
+    });
+    return actuals;
+}
+
+function buildSamplingProgress(targets, actuals) {
+    const progress = {};
+    const allKeys = new Set([...Object.keys(targets), ...Object.keys(actuals)]);
+    allKeys.forEach(key => {
+        const targetBuckets = targets[key] || emptyBucketCounts();
+        const actualBuckets = actuals[key] || emptyBucketCounts();
+        const totalTarget = Object.values(targetBuckets).reduce((a, b) => a + (b || 0), 0);
+        const totalActual = Object.values(actualBuckets).reduce((a, b) => a + (b || 0), 0);
+        const overCollected = BUCKETS.some(b => {
+            const t = targetBuckets[b.label] || 0;
+            const a = actualBuckets[b.label] || 0;
+            return t > 0 && a > t * 1.1;
+        });
+        let status = 'not_started';
+        if (overCollected) status = 'over_collected';
+        else if (totalActual >= totalTarget && totalTarget > 0) status = 'complete';
+        else if (totalActual > 0) status = 'in_progress';
+        progress[key] = {
+            key,
+            status,
+            totalActual,
+            totalTarget,
+            buckets: actualBuckets,
+            targets: targetBuckets
+        };
+    });
+    return progress;
+}
+
+async function ensureSamplingProgress() {
+    if (samplingProgress) return samplingProgress;
+    const targets = await loadSamplingTargets();
+    const actuals = loadSamplingActuals();
+    samplingProgress = buildSamplingProgress(targets, actuals);
+    console.log(`Loaded sampling progress for ${Object.keys(samplingProgress).length} folders`);
+    return samplingProgress;
+}
 
 // Helper function to normalize paths
 function normalizePath(pathStr) {
@@ -334,6 +502,20 @@ app.get('/api/absolutePath', requireAuth, (req, res) => {
     }
     const normalizedPath = normalizePath(decodeURIComponent(filePath));
     res.json({ absolutePath: normalizedPath });
+});
+
+// Sampling progress (bucket targets vs actuals)
+app.get('/api/sampling-progress', requireAuth, async (req, res) => {
+    try {
+        const progress = await ensureSamplingProgress();
+        res.json({
+            buckets: BUCKETS.map(b => b.label),
+            progress
+        });
+    } catch (error) {
+        console.error('Error loading sampling progress:', error);
+        res.status(500).json({ error: 'Failed to load sampling progress' });
+    }
 });
 
 // Get transcript from JSON file in same folder as audio file (TTS D3 format)

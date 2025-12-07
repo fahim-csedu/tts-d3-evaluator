@@ -81,6 +81,7 @@ class AudioFileBrowser {
         
         this.initializeElements();
         this.bindEvents();
+        this.loadSamplingProgress();
         
         // Load root directory to start browsing
         this.loadDirectory('');
@@ -109,6 +110,7 @@ class AudioFileBrowser {
         // Search elements
         this.fileSearch = document.getElementById('fileSearch');
         this.clearSearchBtn = document.getElementById('clearSearch');
+        this.showCompletedCheckbox = document.getElementById('showCompleted');
         
         // Audio time display elements
         this.currentTimeSpan = document.getElementById('currentTime');
@@ -140,6 +142,15 @@ class AudioFileBrowser {
 
         // Audio quality rating inputs
         this.ratingGroups = Array.from(document.querySelectorAll('.rating-buttons'));
+
+        // Sampling progress UI
+        this.bucketSummary = document.getElementById('bucketSummary');
+        this.samplingBadge = document.getElementById('samplingBadge');
+
+        // Sampling progress data
+        this.samplingProgress = null;
+        this.samplingBuckets = [];
+        this.showCompleted = true;
     }
     
     bindEvents() {
@@ -153,6 +164,14 @@ class AudioFileBrowser {
         // Search event listeners
         this.fileSearch.addEventListener('input', (e) => this.handleSearch(e.target.value));
         this.clearSearchBtn.addEventListener('click', () => this.clearSearch());
+        if (this.showCompletedCheckbox) {
+            this.showCompletedCheckbox.addEventListener('change', (e) => {
+                this.showCompleted = e.target.checked;
+                if (this.currentPath !== undefined) {
+                    this.loadDirectory(this.currentPath);
+                }
+            });
+        }
         
         // Audio player event listeners
         this.audioPlayer.addEventListener('loadedmetadata', () => this.updateAudioDuration());
@@ -339,6 +358,28 @@ class AudioFileBrowser {
             setTimeout(() => btn.textContent = originalText, 1000);
         } catch (error) {
             console.error('Failed to copy:', error);
+        }
+    }
+
+    async loadSamplingProgress() {
+        try {
+            const response = await this.fetchWithRetry('/api/sampling-progress', {
+                headers: { 'x-session-id': this.sessionId }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to load sampling progress');
+            }
+            const data = await response.json();
+            this.samplingProgress = data.progress || {};
+            this.samplingBuckets = data.buckets || [];
+            console.log(`Sampling progress loaded for ${Object.keys(this.samplingProgress).length} folders`);
+            const key = this.normalizeSamplingKey(this.selectedFile?.path || this.selectedFile?.audioFile || this.currentPath);
+            if (key) {
+                this.updateSamplingUI(key);
+            }
+        } catch (error) {
+            console.warn('Sampling progress unavailable:', error.message);
+            this.samplingProgress = null;
         }
     }
     
@@ -852,9 +893,24 @@ class AudioFileBrowser {
             return;
         }
         
+        const statusOrder = {
+            over_collected: 0,
+            in_progress: 1,
+            not_started: 2,
+            complete: 3,
+            undefined: 4
+        };
+
         items.sort((a, b) => {
             if (a.type !== b.type) {
                 return a.type === 'folder' ? -1 : 1;
+            }
+            if (a.type === 'folder') {
+                const infoA = this.getSamplingInfoForPath(a.path || a.name);
+                const infoB = this.getSamplingInfoForPath(b.path || b.name);
+                const orderA = statusOrder[infoA?.status] ?? 4;
+                const orderB = statusOrder[infoB?.status] ?? 4;
+                if (orderA !== orderB) return orderA - orderB;
             }
             return a.name.localeCompare(b.name);
         });
@@ -862,6 +918,12 @@ class AudioFileBrowser {
         this.fileList.innerHTML = '';
         
         items.forEach((item, index) => {
+            if (item.type === 'folder' && !this.showCompleted) {
+                const info = this.getSamplingInfoForPath(item.path || item.name);
+                if (info?.status === 'complete') {
+                    return; // skip completed folders when toggle off
+                }
+            }
             const fileItem = document.createElement('div');
             fileItem.className = 'file-item';
             fileItem.dataset.index = index;
@@ -880,11 +942,26 @@ class AudioFileBrowser {
             name.className = 'file-name';
             name.textContent = item.name;
             
-            if (item.type === 'folder' && item.fileCount !== undefined) {
-                const count = document.createElement('span');
-                count.className = 'file-count';
-                count.textContent = `${item.fileCount} items`;
-                name.appendChild(count);
+            if (item.type === 'folder') {
+                if (item.fileCount !== undefined) {
+                    const count = document.createElement('span');
+                    count.className = 'file-count';
+                    count.textContent = `${item.fileCount} items`;
+                    name.appendChild(count);
+                }
+                const samplingInfo = this.getSamplingInfoForPath(item.path || item.name);
+                if (samplingInfo) {
+                    const pill = document.createElement('span');
+                    pill.className = `sampling-pill status-${samplingInfo.status}`;
+                    pill.textContent = {
+                        over_collected: 'Over',
+                        complete: 'Complete',
+                        in_progress: 'In progress',
+                        not_started: 'Not started'
+                    }[samplingInfo.status] || '—';
+                    pill.title = `Total: ${samplingInfo.totalActual}/${samplingInfo.totalTarget}`;
+                    name.appendChild(pill);
+                }
             }
             
             // Add checkmark for annotated audio files
@@ -1104,6 +1181,10 @@ class AudioFileBrowser {
                     this.validationNotesInput.value = '';
                 }
             }
+
+            // Update sampling UI
+            const samplingKey = this.normalizeSamplingKey(filename);
+            this.updateSamplingUI(samplingKey);
             
         } catch (error) {
             console.error('Error loading CSV audio file:', error);
@@ -1241,6 +1322,10 @@ class AudioFileBrowser {
                     this.validationNotesInput.value = '';
                 }
             }
+
+            // Update sampling UI for this file/folder
+            const samplingKey = this.normalizeSamplingKey(item.path || item.audioFile || this.currentPath);
+            this.updateSamplingUI(samplingKey);
             
         } catch (error) {
             console.error('Error loading audio file:', error);
@@ -1551,7 +1636,7 @@ class AudioFileBrowser {
             "'": '&#39;'
         }[c]));
     }
-    
+
     displayMetadata(reference) {
         const metadata = [];
         
@@ -1592,6 +1677,99 @@ class AudioFileBrowser {
         }
         
         this.fileMetadata.innerHTML = metadata.length > 0 ? metadata.join('') : '<span class="metadata-item">No metadata available</span>';
+    }
+
+    // Sampling helpers
+    normalizeSamplingKey(pathStr) {
+        if (!pathStr) return null;
+        let norm = pathStr.replace(/\\/g, '/').replace(/^\/+/, '');
+        if (!norm.startsWith('collect/') && !norm.startsWith('create/')) {
+            if (this.currentPath && (this.currentPath.startsWith('collect') || this.currentPath.startsWith('create'))) {
+                norm = `${this.currentPath.replace(/\/$/, '')}/${norm}`;
+            } else {
+                norm = `collect/${norm}`;
+            }
+        }
+        if (norm.startsWith('collect/')) {
+            const parts = norm.split('/');
+            if (parts.length >= 3) return parts.slice(0,3).join('/');
+        }
+        if (norm.startsWith('create/')) {
+            const parts = norm.split('/');
+            if (parts.length >= 2) return parts.slice(0,2).join('/');
+        }
+        return null;
+    }
+
+    getSamplingInfoForPath(pathStr) {
+        if (!this.samplingProgress) return null;
+        const key = this.normalizeSamplingKey(pathStr);
+        if (!key) return null;
+        return this.samplingProgress[key] || null;
+    }
+
+    buildRemainingText(info) {
+        if (!info) return '';
+        const remaining = [];
+        this.samplingBuckets.forEach(label => {
+            const need = (info.targets[label] || 0) - (info.buckets[label] || 0);
+            if (need > 0) {
+                remaining.push(`${need} more ${label.replace(/[\\[\\]()]/g,'').replace('+','+')}`);
+            }
+        });
+        return remaining.length ? remaining.join(', ') : 'All buckets complete';
+    }
+
+    renderBucketSummary(info) {
+        if (!this.bucketSummary) return;
+        if (!info || !this.samplingBuckets.length) {
+            this.bucketSummary.innerHTML = '<div class="bucket-summary-empty">No sampling target for this folder</div>';
+            return;
+        }
+        const rows = this.samplingBuckets.map(label => {
+            const target = info.targets[label] || 0;
+            const actual = info.buckets[label] || 0;
+            const pct = target > 0 ? Math.min(100, Math.round((actual / target) * 100)) : 0;
+            return `
+                <div class="bucket-row">
+                    <span class="bucket-label">${label}</span>
+                    <div class="bucket-bar">
+                        <div class="bucket-fill" style="width:${pct}%;"></div>
+                    </div>
+                    <span class="bucket-count">${actual} / ${target}</span>
+                </div>
+            `;
+        }).join('');
+        this.bucketSummary.innerHTML = rows;
+    }
+
+    renderSamplingBadge(info) {
+        if (!this.samplingBadge) return;
+        if (!info) {
+            this.samplingBadge.textContent = '';
+            this.samplingBadge.className = 'sampling-badge';
+            return;
+        }
+        const remainingText = this.buildRemainingText(info);
+        const statusClass = {
+            complete: 'badge-complete',
+            in_progress: 'badge-in-progress',
+            not_started: 'badge-not-started',
+            over_collected: 'badge-over'
+        }[info.status] || 'badge-not-started';
+        this.samplingBadge.className = `sampling-badge ${statusClass}`;
+        this.samplingBadge.textContent = remainingText;
+    }
+
+    updateSamplingUI(pathKey) {
+        if (!this.samplingProgress || !pathKey) {
+            this.renderBucketSummary(null);
+            this.renderSamplingBadge(null);
+            return;
+        }
+        const info = this.samplingProgress[pathKey];
+        this.renderBucketSummary(info);
+        this.renderSamplingBadge(info);
     }
     
 

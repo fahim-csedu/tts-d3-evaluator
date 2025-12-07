@@ -224,6 +224,31 @@ main {
     font-size: 16px;
 }
 
+.sampling-pill {
+    margin-left: 6px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.sampling-pill.status-complete {
+    background: #e3f7e9;
+    color: #1d7a3d;
+}
+.sampling-pill.status-in_progress {
+    background: #fff3cd;
+    color: #8a6d1f;
+}
+.sampling-pill.status-not_started {
+    background: #ececec;
+    color: #555;
+}
+.sampling-pill.status-over_collected {
+    background: #fdecea;
+    color: #b02a37;
+}
+
 .file-item[data-type="folder"] {
     font-weight: 500;
 }
@@ -338,6 +363,32 @@ main {
     font-weight: 600;
 }
 
+.sampling-badge {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.sampling-badge.badge-complete {
+    background: #e3f7e9;
+    color: #1d7a3d;
+}
+.sampling-badge.badge-in-progress {
+    background: #fff3cd;
+    color: #8a6d1f;
+}
+.sampling-badge.badge-not-started {
+    background: #ececec;
+    color: #555;
+}
+.sampling-badge.badge-over {
+    background: #fdecea;
+    color: #b02a37;
+}
+
 .transcript-area {
     display: flex;
     flex-direction: column;
@@ -351,6 +402,50 @@ main {
     border-radius: 8px;
     background: white;
     margin-bottom: 15px;
+}
+
+.bucket-summary {
+    padding: 12px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+}
+
+.bucket-summary-empty {
+    color: #777;
+    font-size: 13px;
+}
+
+.bucket-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 80px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.bucket-label {
+    font-size: 13px;
+    color: #555;
+}
+
+.bucket-bar {
+    background: #ededed;
+    border-radius: 999px;
+    height: 10px;
+    overflow: hidden;
+}
+
+.bucket-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f87272, #facc15, #22c55e);
+    transition: width 0.2s ease;
+}
+
+.bucket-count {
+    font-size: 12px;
+    font-weight: 700;
+    color: #333;
 }
 
 .transcript-header {
@@ -1175,6 +1270,20 @@ main {
 .clear-search-btn:hover {
     background: #e0e0e0;
     color: #333;
+}
+
+.toggle-completed {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #555;
+    margin-left: auto;
+}
+
+.toggle-completed input {
+    width: 14px;
+    height: 14px;
 }
 
 /* Button Styles */

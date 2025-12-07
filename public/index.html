@@ -119,6 +119,10 @@
                     <div class="search-bar">
                         <input type="text" id="fileSearch" placeholder="Search by filename..." />
                         <button id="clearSearch" class="clear-search-btn" title="Clear search">✕</button>
+                        <label class="toggle-completed">
+                            <input type="checkbox" id="showCompleted" checked />
+                            <span>Show completed</span>
+                        </label>
                     </div>
                     <div class="file-list" id="fileList">
                         <div class="loading">Loading files...</div>
@@ -135,6 +139,7 @@
                                 <div class="audio-time-display">
                                     <span id="currentTime">0:00</span> / <span id="totalDuration">0:00</span>
                                 </div>
+                                <div id="samplingBadge" class="sampling-badge"></div>
                             </div>
                             <div class="player-controls">
                                 <audio id="audioPlayer" controls>
@@ -145,6 +150,7 @@
                     </div>
                     
                     <div class="transcript-area">
+                        <div id="bucketSummary" class="bucket-summary"></div>
                         <div class="transcript-section">
                             <div class="transcript-header">
                                 <h4>Transcript</h4>
