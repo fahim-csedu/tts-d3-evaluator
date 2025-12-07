@@ -96,7 +96,6 @@ class AudioFileBrowser {
         this.currentFileSpan = document.getElementById('currentFile');
         this.referenceContent = document.getElementById('referenceContent');
         this.transcriptionStatus = document.getElementById('transcriptionStatus');
-        this.fileMetadata = document.getElementById('fileMetadata');
         this.logoutBtn = document.getElementById('logoutBtn');
         this.userInfo = document.getElementById('userInfo');
         this.loadingOverlay = document.getElementById('loadingOverlay');
@@ -1564,46 +1563,8 @@ class AudioFileBrowser {
         }[c]));
     }
 
-    displayMetadata(reference) {
-        const metadata = [];
-        
-        // Helper to check if value is meaningful
-        const isValid = (value) => {
-            if (!value) return false;
-            const lower = value.toLowerCase();
-            return !lower.includes('unknown') && value.trim() !== '';
-        };
-        
-        // Parse demographics to extract individual fields
-        let gender = reference.gender || '';
-        let age = reference.age || '';
-        let accent = reference.accents || '';
-        
-        // If demog_group exists, try to parse it (format: gender|age|accent)
-        if (reference.demog_group) {
-            const parts = reference.demog_group.split('|');
-            if (parts.length >= 3) {
-                if (!gender || !isValid(gender)) gender = parts[0];
-                if (!age || !isValid(age)) age = parts[1];
-                if (!accent || !isValid(accent)) accent = parts[2];
-            }
-        }
-        
-        // Add valid fields only
-        if (isValid(age)) {
-            metadata.push(`<span class="metadata-item"><span class="metadata-label">Age:</span> ${age}</span>`);
-        }
-        if (isValid(gender)) {
-            metadata.push(`<span class="metadata-item"><span class="metadata-label">Gender:</span> ${gender}</span>`);
-        }
-        if (isValid(accent)) {
-            metadata.push(`<span class="metadata-item"><span class="metadata-label">Accent:</span> ${accent}</span>`);
-        }
-        if (isValid(reference.variant)) {
-            metadata.push(`<span class="metadata-item"><span class="metadata-label">Variant:</span> ${reference.variant}</span>`);
-        }
-        
-        this.fileMetadata.innerHTML = metadata.length > 0 ? metadata.join('') : '<span class="metadata-item">No metadata available</span>';
+    displayMetadata() {
+        // Metadata display removed
     }
 
     // Sampling helpers
