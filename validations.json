@@ -1,0 +1,56 @@
+{
+  "1e7ea0ce-8a48-41a3-9e9c-aa6cb2a756b4": {
+    "filename": "1e7ea0ce-8a48-41a3-9e9c-aa6cb2a756b4",
+    "duration": 0,
+    "reference_transcript": "",
+    "api_transcript": "",
+    "is_reference_correct": false,
+    "is_api_correct": false,
+    "ideal_transcript": "নিরাশ হবার পাত্র আমি নই, দাঁড়িয়ে থাকি।\nদেখি, অন্তত একটা পা রাখবার জায়গাও যদি মিলে যায়।\nএকটা বাস এসে থামে।\nপা রাখবার জায়গা নেই, তবুও সব লোক ছুটোছুটি করছে কে কার আগে উঠবে।\nচাকরি ঠিক রাখার কী প্রাণান্ত চেষ্টা।\nএকটা লোক নেমে যায় ড্রাইভার এর কুঠুরি থেকে।\nমহাসুযোগ, পাশের কয়েকজনকে টেক্কা মেরে চট করে উঠে পড়ি আমি।\nচাকরি গেলে আমার চলবে না।\nহঠাৎ আমার বুকে ধাক্কা মেরে এক",
+    "timestamp": "2025-11-29T00:19:08.874Z"
+  },
+  "20524e31-0e53-442b-9e20-890a419bec6c": {
+    "filename": "20524e31-0e53-442b-9e20-890a419bec6c",
+    "duration": 0,
+    "reference_transcript": "",
+    "api_transcript": "",
+    "is_reference_correct": true,
+    "is_api_correct": false,
+    "ideal_transcript": "পৃষ্ঠা একশো আট\nবন মানুষ\nআবু ইসহাক\nলেখক পরিচিতি\nআবু ইসহাক উনিশশো ছাব্বিশ সালের পহেলা নভেম্বর শরীয়তপুর জেলার শিরঙ্গল গ্রামে জন্মগ্রহণ করেন\nতিনি উনিশশো বিয়াল্লিশ সালে ম্যাট্রিক ও উনিশশো চুয়াল্লিশ সালে আইএ পাস করার পরই সরকারি চাকরিতে প্রবেশ করেন\nউনিশশো ষাট সালে তিনি করাচী বিশ্ববিদ্যালয় থেকে বিএ পরীক্ষায় উত্তীর্ণ হন\nউনিশশো তিরাশি সালে",
+    "timestamp": "2025-11-29T00:19:25.045Z"
+  },
+  "40c8100b-83c8-4437-be6a-b63da257c5d5": {
+    "filename": "40c8100b-83c8-4437-be6a-b63da257c5d5",
+    "duration": 0,
+    "reference_transcript": "",
+    "api_transcript": "",
+    "is_reference_correct": false,
+    "is_api_correct": false,
+    "ideal_transcript": "অশুনি, বাজ, বর্জ্র\nমুক্তাকেশের পুঞ্জ মেঘে লুকায় অশনি\nখোলা কালো চুলের মধ্যে বাজ লুকিয়ে যায়\nরৌদ্র বসনি\n@রৌদ্রুক@ পোশাক পরা- রোদের পোশাক অর্থাৎ উজ্জ্বল বেশ; অনাদরে অযত্নে উপেক্ষায়\nমলিন- উজ্জ্বল নয় এমন; ময়লাযুক্ত, বিষণ্ন ও ম্লান; দীপ্তিরাশি- আলোর ছটা; হৃদয় হরোণি মনকে বশীভূত করে এমন\nঅভয়",
+    "timestamp": "2025-12-07T01:39:11.454Z",
+    "punctuation_missing": true,
+    "notes": "Test",
+    "naturalness": 1,
+    "intelligibility": 2,
+    "prosody": 3,
+    "pronunciation": 4,
+    "overall": 5
+  },
+  "0a0a7c7c-aaa2-417f-ab22-7ce5e46c5cd1": {
+    "filename": "0a0a7c7c-aaa2-417f-ab22-7ce5e46c5cd1",
+    "duration": 0,
+    "reference_transcript": "",
+    "api_transcript": "",
+    "is_reference_correct": true,
+    "is_api_correct": false,
+    "ideal_transcript": "নিজের জানা আরেকটি ছড়া বলি",
+    "timestamp": "2025-12-07T01:40:27.401Z",
+    "punctuation_missing": false,
+    "notes": "testing",
+    "naturalness": 5,
+    "intelligibility": 4,
+    "prosody": 3,
+    "pronunciation": 2,
+    "overall": 1
+  }
+}

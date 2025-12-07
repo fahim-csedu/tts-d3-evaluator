@@ -411,6 +411,43 @@ main {
     border-radius: 6px;
 }
 
+.bucket-summary-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    flex-wrap: wrap;
+}
+
+.bucket-status-pill {
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.bucket-status-pill.status-complete {
+    background: #e3f7e9;
+    color: #1d7a3d;
+}
+.bucket-status-pill.status-in_progress {
+    background: #fff3cd;
+    color: #8a6d1f;
+}
+.bucket-status-pill.status-not_started {
+    background: #ececec;
+    color: #555;
+}
+.bucket-status-pill.status-over_collected {
+    background: #fdecea;
+    color: #b02a37;
+}
+
+.bucket-total {
+    font-size: 13px;
+    color: #444;
+}
+
 .bucket-summary-empty {
     color: #777;
     font-size: 13px;

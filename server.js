@@ -628,9 +628,13 @@ app.post('/api/annotation', requireAuth, async (req, res) => {
             fs.mkdirSync(ANNOTATIONS_DIR, { recursive: true });
         }
         
-        // Extract base filename from absolute path or use provided filename
-        const audioFileName = path.basename(annotationData.absolutePath, path.extname(annotationData.absolutePath));
-        const annotationFilename = `${audioFileName}.json`;
+        // Extract base filename safely (handle Windows-style paths on non-Windows host)
+        const safeBase = (annotationData.absolutePath || '')
+            .split(/[/\\]+/)
+            .pop()
+            .replace(/\.[^/.]+$/, '')
+            .replace(/[^a-zA-Z0-9_.-]/g, '_') || 'annotation';
+        const annotationFilename = `${safeBase}.json`;
         const annotationPath = path.join(ANNOTATIONS_DIR, annotationFilename);
         
         // Get username from session

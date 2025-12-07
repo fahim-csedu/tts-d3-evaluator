@@ -81,10 +81,10 @@ class AudioFileBrowser {
         
         this.initializeElements();
         this.bindEvents();
-        this.loadSamplingProgress();
-        
-        // Load root directory to start browsing
-        this.loadDirectory('');
+        // Load sampling progress first, then directory to ensure status pills are populated
+        this.loadSamplingProgress().finally(() => {
+            this.loadDirectory('');
+        });
         
         this.updateUserInfo();
     }
@@ -959,7 +959,12 @@ class AudioFileBrowser {
                         in_progress: 'In progress',
                         not_started: 'Not started'
                     }[samplingInfo.status] || '—';
-                    pill.title = `Total: ${samplingInfo.totalActual}/${samplingInfo.totalTarget}`;
+                    const bucketDetails = this.samplingBuckets.map(label => {
+                        const a = samplingInfo.buckets?.[label] || 0;
+                        const t = samplingInfo.targets?.[label] || 0;
+                        return `${label}: ${a}/${t}`;
+                    }).join(' | ');
+                    pill.title = `Total: ${samplingInfo.totalActual}/${samplingInfo.totalTarget}${bucketDetails ? ' • ' + bucketDetails : ''}`;
                     name.appendChild(pill);
                 }
             }
@@ -1726,6 +1731,19 @@ class AudioFileBrowser {
             this.bucketSummary.innerHTML = '<div class="bucket-summary-empty">No sampling target for this folder</div>';
             return;
         }
+        const header = `
+            <div class="bucket-summary-header">
+                <span class="bucket-status-pill status-${info.status || 'not_started'}">
+                    ${{
+                        over_collected: 'Over-collected',
+                        complete: 'Complete',
+                        in_progress: 'In progress',
+                        not_started: 'Not started'
+                    }[info.status] || 'Not started'}
+                </span>
+                <span class="bucket-total">Total: ${info.totalActual} / ${info.totalTarget}</span>
+            </div>
+        `;
         const rows = this.samplingBuckets.map(label => {
             const target = info.targets[label] || 0;
             const actual = info.buckets[label] || 0;
@@ -1740,7 +1758,7 @@ class AudioFileBrowser {
                 </div>
             `;
         }).join('');
-        this.bucketSummary.innerHTML = rows;
+        this.bucketSummary.innerHTML = header + rows;
     }
 
     renderSamplingBadge(info) {
