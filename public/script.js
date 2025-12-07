@@ -81,10 +81,8 @@ class AudioFileBrowser {
         
         this.initializeElements();
         this.bindEvents();
-        // Load sampling progress first, then directory to ensure status pills are populated
-        this.loadSamplingProgress().finally(() => {
-            this.loadDirectory('');
-        });
+        // Load root directory to start browsing
+        this.loadDirectory('');
         
         this.updateUserInfo();
     }
@@ -110,7 +108,6 @@ class AudioFileBrowser {
         // Search elements
         this.fileSearch = document.getElementById('fileSearch');
         this.clearSearchBtn = document.getElementById('clearSearch');
-        this.showCompletedCheckbox = document.getElementById('showCompleted');
         
         // Audio time display elements
         this.currentTimeSpan = document.getElementById('currentTime');
@@ -144,14 +141,9 @@ class AudioFileBrowser {
         this.ratingGroups = Array.from(document.querySelectorAll('.rating-buttons'));
 
         // Sampling progress UI
-        this.bucketSummary = document.getElementById('bucketSummary');
-        this.samplingBadge = document.getElementById('samplingBadge');
-        this.samplingRibbon = document.getElementById('samplingRibbon');
-
-        // Sampling progress data
-        this.samplingProgress = null;
-        this.samplingBuckets = [];
-        this.showCompleted = true;
+        this.bucketSummary = null;
+        this.samplingBadge = null;
+        this.samplingRibbon = null;
     }
     
     bindEvents() {
@@ -165,14 +157,6 @@ class AudioFileBrowser {
         // Search event listeners
         this.fileSearch.addEventListener('input', (e) => this.handleSearch(e.target.value));
         this.clearSearchBtn.addEventListener('click', () => this.clearSearch());
-        if (this.showCompletedCheckbox) {
-            this.showCompletedCheckbox.addEventListener('change', (e) => {
-                this.showCompleted = e.target.checked;
-                if (this.currentPath !== undefined) {
-                    this.loadDirectory(this.currentPath);
-                }
-            });
-        }
         
         // Audio player event listeners
         this.audioPlayer.addEventListener('loadedmetadata', () => this.updateAudioDuration());
@@ -363,25 +347,7 @@ class AudioFileBrowser {
     }
 
     async loadSamplingProgress() {
-        try {
-            const response = await this.fetchWithRetry('/api/sampling-progress', {
-                headers: { 'x-session-id': this.sessionId }
-            });
-            if (!response.ok) {
-                throw new Error('Failed to load sampling progress');
-            }
-            const data = await response.json();
-            this.samplingProgress = data.progress || {};
-            this.samplingBuckets = data.buckets || [];
-            console.log(`Sampling progress loaded for ${Object.keys(this.samplingProgress).length} folders`);
-            const key = this.normalizeSamplingKey(this.selectedFile?.path || this.selectedFile?.audioFile || this.currentPath);
-            if (key) {
-                this.updateSamplingUI(key);
-            }
-        } catch (error) {
-            console.warn('Sampling progress unavailable:', error.message);
-            this.samplingProgress = null;
-        }
+        // Sampling metrics removed
     }
     
     // Audio player methods
@@ -894,24 +860,9 @@ class AudioFileBrowser {
             return;
         }
         
-        const statusOrder = {
-            over_collected: 0,
-            in_progress: 1,
-            not_started: 2,
-            complete: 3,
-            undefined: 4
-        };
-
         items.sort((a, b) => {
             if (a.type !== b.type) {
                 return a.type === 'folder' ? -1 : 1;
-            }
-            if (a.type === 'folder') {
-                const infoA = this.getSamplingInfoForPath(a.path || a.name);
-                const infoB = this.getSamplingInfoForPath(b.path || b.name);
-                const orderA = statusOrder[infoA?.status] ?? 4;
-                const orderB = statusOrder[infoB?.status] ?? 4;
-                if (orderA !== orderB) return orderA - orderB;
             }
             return a.name.localeCompare(b.name);
         });
@@ -919,12 +870,6 @@ class AudioFileBrowser {
         this.fileList.innerHTML = '';
         
         items.forEach((item, index) => {
-            if (item.type === 'folder' && !this.showCompleted) {
-                const info = this.getSamplingInfoForPath(item.path || item.name);
-                if (info?.status === 'complete') {
-                    return; // skip completed folders when toggle off
-                }
-            }
             const fileItem = document.createElement('div');
             fileItem.className = 'file-item';
             fileItem.dataset.index = index;
@@ -949,24 +894,6 @@ class AudioFileBrowser {
                     count.className = 'file-count';
                     count.textContent = `${item.fileCount} items`;
                     name.appendChild(count);
-                }
-                const samplingInfo = this.getSamplingInfoForPath(item.path || item.name);
-                if (samplingInfo) {
-                    const pill = document.createElement('span');
-                    pill.className = `sampling-pill status-${samplingInfo.status}`;
-                    pill.textContent = {
-                        over_collected: 'Over',
-                        complete: 'Complete',
-                        in_progress: 'In progress',
-                        not_started: 'Not started'
-                    }[samplingInfo.status] || '—';
-                    const bucketDetails = this.samplingBuckets.map(label => {
-                        const a = samplingInfo.buckets?.[label] || 0;
-                        const t = samplingInfo.targets?.[label] || 0;
-                        return `${label}: ${a}/${t}`;
-                    }).join(' | ');
-                    pill.title = `Total: ${samplingInfo.totalActual}/${samplingInfo.totalTarget}${bucketDetails ? ' • ' + bucketDetails : ''}`;
-                    name.appendChild(pill);
                 }
             }
             
@@ -1188,9 +1115,6 @@ class AudioFileBrowser {
                 }
             }
 
-            // Update sampling UI
-            const samplingKey = this.normalizeSamplingKey(filename);
-            this.updateSamplingUI(samplingKey);
             
         } catch (error) {
             console.error('Error loading CSV audio file:', error);
@@ -1329,9 +1253,6 @@ class AudioFileBrowser {
                 }
             }
 
-            // Update sampling UI for this file/folder
-            const samplingKey = this.normalizeSamplingKey(item.path || item.audioFile || this.currentPath);
-            this.updateSamplingUI(samplingKey);
             
         } catch (error) {
             console.error('Error loading audio file:', error);
@@ -1686,134 +1607,7 @@ class AudioFileBrowser {
     }
 
     // Sampling helpers
-    normalizeSamplingKey(pathStr) {
-        if (!pathStr) return null;
-        let norm = pathStr.replace(/\\/g, '/').replace(/^\/+/, '');
-        if (!norm.startsWith('collect/') && !norm.startsWith('create/')) {
-            if (this.currentPath && (this.currentPath.startsWith('collect') || this.currentPath.startsWith('create'))) {
-                norm = `${this.currentPath.replace(/\/$/, '')}/${norm}`;
-            } else {
-                norm = `collect/${norm}`;
-            }
-        }
-        if (norm.startsWith('collect/')) {
-            const parts = norm.split('/');
-            if (parts.length >= 3) return parts.slice(0,3).join('/');
-        }
-        if (norm.startsWith('create/')) {
-            const parts = norm.split('/');
-            if (parts.length >= 2) return parts.slice(0,2).join('/');
-        }
-        return null;
-    }
-
-    getSamplingInfoForPath(pathStr) {
-        if (!this.samplingProgress) return null;
-        const key = this.normalizeSamplingKey(pathStr);
-        if (!key) return null;
-        return this.samplingProgress[key] || null;
-    }
-
-    buildRemainingText(info) {
-        if (!info) return '';
-        const remaining = [];
-        this.samplingBuckets.forEach(label => {
-            const need = (info.targets[label] || 0) - (info.buckets[label] || 0);
-            if (need > 0) {
-                remaining.push(`${need} more ${label.replace(/[\\[\\]()]/g,'').replace('+','+')}`);
-            }
-        });
-        return remaining.length ? remaining.join(', ') : 'All buckets complete';
-    }
-
-    renderBucketSummary(info) {
-        if (!this.bucketSummary) return;
-        if (!info || !this.samplingBuckets.length) {
-            this.bucketSummary.innerHTML = '<div class="bucket-summary-empty">No sampling target for this folder</div>';
-            return;
-        }
-        const header = `
-            <div class="bucket-summary-header">
-                <span class="bucket-status-pill status-${info.status || 'not_started'}">
-                    ${{
-                        over_collected: 'Over-collected',
-                        complete: 'Complete',
-                        in_progress: 'In progress',
-                        not_started: 'Not started'
-                    }[info.status] || 'Not started'}
-                </span>
-                <span class="bucket-total">Total: ${info.totalActual} / ${info.totalTarget}</span>
-            </div>
-        `;
-        const rows = this.samplingBuckets.map(label => {
-            const target = info.targets[label] || 0;
-            const actual = info.buckets[label] || 0;
-            const pct = target > 0 ? Math.min(100, Math.round((actual / target) * 100)) : 0;
-            return `
-                <div class="bucket-row">
-                    <span class="bucket-label">${label}</span>
-                    <div class="bucket-bar">
-                        <div class="bucket-fill" style="width:${pct}%;"></div>
-                    </div>
-                    <span class="bucket-count">${actual} / ${target}</span>
-                </div>
-            `;
-        }).join('');
-        this.bucketSummary.innerHTML = header + rows;
-    }
-
-    renderSamplingBadge(info) {
-        if (!this.samplingBadge) return;
-        if (!info) {
-            this.samplingBadge.textContent = '';
-            this.samplingBadge.className = 'sampling-badge';
-            return;
-        }
-        const remainingText = this.buildRemainingText(info);
-        const statusClass = {
-            complete: 'badge-complete',
-            in_progress: 'badge-in-progress',
-            not_started: 'badge-not-started',
-            over_collected: 'badge-over'
-        }[info.status] || 'badge-not-started';
-        this.samplingBadge.className = `sampling-badge ${statusClass}`;
-        this.samplingBadge.textContent = remainingText;
-    }
-
-    renderSamplingRibbon(info) {
-        if (!this.samplingRibbon) return;
-        if (!info || !this.samplingBuckets.length) {
-            this.samplingRibbon.innerHTML = '';
-            return;
-        }
-        const cells = this.samplingBuckets.map(label => {
-            const target = info.targets[label] || 0;
-            const actual = info.buckets[label] || 0;
-            const isComplete = target > 0 && actual >= target;
-            const isOver = target > 0 && actual > target * 1.1;
-            const cls = isOver ? 'over' : isComplete ? 'complete' : '';
-            return `
-                <div class="bucket-cell ${cls}">
-                    <span class="label">${label}</span>
-                    <span class="counts">${actual} / ${target}</span>
-                </div>
-            `;
-        }).join('');
-        this.samplingRibbon.innerHTML = `<div class="sampling-ribbon-table">${cells}</div>`;
-    }
-
-    updateSamplingUI(pathKey) {
-        if (!this.samplingProgress || !pathKey) {
-            this.renderBucketSummary(null);
-            this.renderSamplingBadge(null);
-            this.renderSamplingRibbon(null);
-            return;
-        }
-        const info = this.samplingProgress[pathKey];
-        this.renderBucketSummary(info);
-        this.renderSamplingBadge(info);
-        this.renderSamplingRibbon(info);
-    }
+    // Sampling UI removed
     
 
     
