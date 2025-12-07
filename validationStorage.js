@@ -15,6 +15,11 @@ const path = require('path');
  * @property {string} notes - Validation notes
  * @property {string} timestamp - ISO timestamp of validation
  * @property {string} [annotator] - Optional: username of annotator
+ * @property {number} [naturalness] - Naturalness rating (1-5)
+ * @property {number} [intelligibility] - Intelligibility rating (1-5)
+ * @property {number} [prosody] - Prosody rating (1-5)
+ * @property {number} [pronunciation] - Pronunciation rating (1-5)
+ * @property {number} [overall] - Overall quality rating (1-5)
  */
 
 /**
@@ -125,6 +130,19 @@ class ValidationStorage {
                     console.log(`Ideal transcript changed for ${record.filename}`);
                 }
             }
+
+            // Normalize rating values to 1-5 range if provided
+            const ratingFields = ['naturalness', 'intelligibility', 'prosody', 'pronunciation', 'overall'];
+            const ratings = {};
+            for (const field of ratingFields) {
+                const value = Number(record[field]);
+                if (Number.isFinite(value)) {
+                    ratings[field] = Math.min(5, Math.max(1, value));
+                } else if (existingValidation && Number.isFinite(existingValidation[field])) {
+                    // Preserve existing rating if no new value is provided
+                    ratings[field] = existingValidation[field];
+                }
+            }
             
             // Ensure all required fields are present
             const validationRecord = {
@@ -138,6 +156,7 @@ class ValidationStorage {
                 timestamp: record.timestamp || new Date().toISOString(),
                 punctuation_missing: record.punctuation_missing || false,
                 notes: record.notes || '',
+                ...ratings,
                 ...(record.annotator && { annotator: record.annotator }),
                 ...(issues.length > 0 && { _data_issues: issues })
             };

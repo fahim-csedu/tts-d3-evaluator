@@ -17,14 +17,19 @@ describe('Excel Export Service', () => {
             const worksheet = workbook.getWorksheet('Validations');
             
             expect(worksheet).toBeDefined();
-            expect(worksheet.columns.length).toBe(7);
+            expect(worksheet.columns.length).toBe(12);
             expect(worksheet.columns[0].header).toBe('filename');
             expect(worksheet.columns[1].header).toBe('duration');
             expect(worksheet.columns[2].header).toBe('reference_transcript');
             expect(worksheet.columns[3].header).toBe('api_transcript');
-            expect(worksheet.columns[4].header).toBe('is_reference_correct');
-            expect(worksheet.columns[5].header).toBe('is_api_correct');
-            expect(worksheet.columns[6].header).toBe('ideal_transcript');
+            expect(worksheet.columns[4].header).toBe('naturalness');
+            expect(worksheet.columns[5].header).toBe('intelligibility');
+            expect(worksheet.columns[6].header).toBe('prosody');
+            expect(worksheet.columns[7].header).toBe('pronunciation');
+            expect(worksheet.columns[8].header).toBe('overall');
+            expect(worksheet.columns[9].header).toBe('is_reference_correct');
+            expect(worksheet.columns[10].header).toBe('is_api_correct');
+            expect(worksheet.columns[11].header).toBe('ideal_transcript');
         });
         
         it('should populate rows with validation data', async () => {
@@ -36,6 +41,11 @@ describe('Excel Export Service', () => {
                     api_transcript: 'এপিআই',
                     is_reference_correct: true,
                     is_api_correct: false,
+                    naturalness: 4,
+                    intelligibility: 5,
+                    prosody: 4,
+                    pronunciation: 5,
+                    overall: 4,
                     ideal_transcript: 'রেফারেন্স'
                 }
             ];
@@ -52,9 +62,14 @@ describe('Excel Export Service', () => {
             expect(dataRow.getCell(2).value).toBe(5.5);
             expect(dataRow.getCell(3).value).toBe('রেফারেন্স');
             expect(dataRow.getCell(4).value).toBe('এপিআই');
-            expect(dataRow.getCell(5).value).toBe('TRUE');
-            expect(dataRow.getCell(6).value).toBe('FALSE');
-            expect(dataRow.getCell(7).value).toBe('রেফারেন্স');
+            expect(dataRow.getCell(5).value).toBe(4);
+            expect(dataRow.getCell(6).value).toBe(5);
+            expect(dataRow.getCell(7).value).toBe(4);
+            expect(dataRow.getCell(8).value).toBe(5);
+            expect(dataRow.getCell(9).value).toBe(4);
+            expect(dataRow.getCell(10).value).toBe('TRUE');
+            expect(dataRow.getCell(11).value).toBe('FALSE');
+            expect(dataRow.getCell(12).value).toBe('রেফারেন্স');
         });
         
         it('should merge data from metadata when not in validation', async () => {
@@ -83,9 +98,14 @@ describe('Excel Export Service', () => {
             expect(dataRow.getCell(2).value).toBe(7.2); // From metadata
             expect(dataRow.getCell(3).value).toBe('রেফারেন্স মেটাডেটা'); // From metadata
             expect(dataRow.getCell(4).value).toBe('এপিআই মেটাডেটা'); // From metadata
-            expect(dataRow.getCell(5).value).toBe('FALSE');
-            expect(dataRow.getCell(6).value).toBe('TRUE');
-            expect(dataRow.getCell(7).value).toBe('এপিআই ট্রান্সক্রিপ্ট');
+            expect(dataRow.getCell(5).value).toBe('');
+            expect(dataRow.getCell(6).value).toBe('');
+            expect(dataRow.getCell(7).value).toBe('');
+            expect(dataRow.getCell(8).value).toBe('');
+            expect(dataRow.getCell(9).value).toBe('');
+            expect(dataRow.getCell(10).value).toBe('FALSE');
+            expect(dataRow.getCell(11).value).toBe('TRUE');
+            expect(dataRow.getCell(12).value).toBe('এপিআই ট্রান্সক্রিপ্ট');
         });
         
         it('should handle multiple validations', async () => {

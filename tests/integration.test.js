@@ -189,6 +189,11 @@ describe('End-to-End Validation Flow', () => {
                 is_reference_correct: true,
                 is_api_correct: false,
                 ideal_transcript: metadataResponse.body.reference_transcript,
+                naturalness: 4,
+                intelligibility: 5,
+                prosody: 4,
+                pronunciation: 5,
+                overall: 4,
                 timestamp: new Date().toISOString()
             };
             
@@ -208,7 +213,9 @@ describe('End-to-End Validation Flow', () => {
                 filename: testFilename,
                 is_reference_correct: true,
                 is_api_correct: false,
-                ideal_transcript: validationData.ideal_transcript
+                ideal_transcript: validationData.ideal_transcript,
+                naturalness: 4,
+                overall: 4
             });
             
             // Step 4: Export to Excel
@@ -238,6 +245,11 @@ describe('End-to-End Validation Flow', () => {
                     is_reference_correct: true,
                     is_api_correct: false,
                     ideal_transcript: 'এটি একটি পরীক্ষা',
+                    naturalness: 4,
+                    intelligibility: 5,
+                    prosody: 4,
+                    pronunciation: 5,
+                    overall: 4,
                     timestamp: new Date().toISOString()
                 })
                 .expect(200);
@@ -250,6 +262,11 @@ describe('End-to-End Validation Flow', () => {
                     is_reference_correct: false,
                     is_api_correct: true,
                     ideal_transcript: 'দ্বিতীয় পরীক্ষা ফাইল',
+                    naturalness: 3,
+                    intelligibility: 4,
+                    prosody: 3,
+                    pronunciation: 4,
+                    overall: 3,
                     timestamp: new Date().toISOString()
                 })
                 .expect(200);
@@ -275,6 +292,11 @@ describe('End-to-End Validation Flow', () => {
                 is_reference_correct: true,
                 is_api_correct: false,
                 ideal_transcript: 'এটি একটি পরীক্ষা',
+                naturalness: 4,
+                intelligibility: 5,
+                prosody: 4,
+                pronunciation: 5,
+                overall: 4,
                 timestamp: new Date().toISOString()
             };
             
@@ -289,6 +311,11 @@ describe('End-to-End Validation Flow', () => {
                 is_reference_correct: false,
                 is_api_correct: true,
                 ideal_transcript: 'এটি একটি সংশোধিত পরীক্ষা',
+                naturalness: 2,
+                intelligibility: 3,
+                prosody: 2,
+                pronunciation: 3,
+                overall: 2,
                 timestamp: new Date().toISOString()
             };
             
@@ -321,6 +348,11 @@ describe('End-to-End Validation Flow', () => {
                     is_reference_correct: true,
                     is_api_correct: false,
                     ideal_transcript: 'এটি একটি পরীক্ষা',
+                    naturalness: 4,
+                    intelligibility: 5,
+                    prosody: 4,
+                    pronunciation: 5,
+                    overall: 4,
                     timestamp: new Date().toISOString()
                 })
                 .expect(200);
@@ -335,14 +367,15 @@ describe('End-to-End Validation Flow', () => {
             expect(validation).toBeDefined();
             expect(validation.filename).toBe('test_audio_1');
             expect(validation.ideal_transcript).toBe('এটি একটি পরীক্ষা');
+            expect(validation.naturalness).toBe(4);
         });
         
         test('should maintain validation history across multiple saves', async () => {
             // Save multiple validations
             const validations = [
-                { filename: 'test_audio_1', ideal_transcript: 'প্রথম' },
-                { filename: 'test_audio_2', ideal_transcript: 'দ্বিতীয়' },
-                { filename: 'test_audio_3', ideal_transcript: 'তৃতীয়' }
+                { filename: 'test_audio_1', ideal_transcript: 'प्रথম', naturalness: 3, intelligibility: 3, prosody: 3, pronunciation: 3, overall: 3 },
+                { filename: 'test_audio_2', ideal_transcript: 'द্বিতীয়', naturalness: 4, intelligibility: 4, prosody: 4, pronunciation: 4, overall: 4 },
+                { filename: 'test_audio_3', ideal_transcript: 'তৃতীয়', naturalness: 5, intelligibility: 5, prosody: 5, pronunciation: 5, overall: 5 }
             ];
             
             for (const val of validations) {

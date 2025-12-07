@@ -463,6 +463,11 @@ app.post('/api/annotation', requireAuth, async (req, res) => {
             punctuation_missing: annotationData.punctuationMissing,
             duration: annotationData.duration,
             notes: annotationData.notes,
+            naturalness: annotationData.naturalness,
+            intelligibility: annotationData.intelligibility,
+            prosody: annotationData.prosody,
+            pronunciation: annotationData.pronunciation,
+            overall: annotationData.overall,
             annotator: username,
             timestamp: annotationData.timestamp || new Date().toISOString()
         };
@@ -966,4 +971,3 @@ app.listen(PORT, () => {
         }
     }
 });
-

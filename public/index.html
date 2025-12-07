@@ -182,9 +182,72 @@
                                     Punctuation missing between sentences
                                 </label>
                             </div>
+                            
+                            <!-- Audio Quality Ratings -->
+                            <div class="quality-ratings-section">
+                                <h4>Audio Quality Evaluation (1-5 scale)</h4>
+                                <p class="rating-note">Please rate each category (1 = poor, 5 = excellent).</p>
+                                <div class="rating-grid">
+                                    <div class="rating-item">
+                                        <label>Naturalness (Does it sound like a real human?):</label>
+                                        <div class="rating-buttons" data-rating="naturalness">
+                                            <button type="button" data-value="1">1</button>
+                                            <button type="button" data-value="2">2</button>
+                                            <button type="button" data-value="3">3</button>
+                                            <button type="button" data-value="4">4</button>
+                                            <button type="button" data-value="5">5</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="rating-item">
+                                        <label>Intelligibility (Can every word be understood clearly?):</label>
+                                        <div class="rating-buttons" data-rating="intelligibility">
+                                            <button type="button" data-value="1">1</button>
+                                            <button type="button" data-value="2">2</button>
+                                            <button type="button" data-value="3">3</button>
+                                            <button type="button" data-value="4">4</button>
+                                            <button type="button" data-value="5">5</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="rating-item">
+                                        <label>Prosody (Are rhythm, stress, pauses natural?):</label>
+                                        <div class="rating-buttons" data-rating="prosody">
+                                            <button type="button" data-value="1">1</button>
+                                            <button type="button" data-value="2">2</button>
+                                            <button type="button" data-value="3">3</button>
+                                            <button type="button" data-value="4">4</button>
+                                            <button type="button" data-value="5">5</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="rating-item">
+                                        <label>Pronunciation (Any mispronounced words?):</label>
+                                        <div class="rating-buttons" data-rating="pronunciation">
+                                            <button type="button" data-value="1">1</button>
+                                            <button type="button" data-value="2">2</button>
+                                            <button type="button" data-value="3">3</button>
+                                            <button type="button" data-value="4">4</button>
+                                            <button type="button" data-value="5">5</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="rating-item">
+                                        <label>Overall (General impression):</label>
+                                        <div class="rating-buttons" data-rating="overall">
+                                            <button type="button" data-value="1">1</button>
+                                            <button type="button" data-value="2">2</button>
+                                            <button type="button" data-value="3">3</button>
+                                            <button type="button" data-value="4">4</button>
+                                            <button type="button" data-value="5">5</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="notes-section">
                                 <label for="validationNotes">Notes (optional):</label>
-                                <textarea id="validationNotes" rows="2" placeholder="Add any notes about this validation (e.g., audio quality, pronunciation issues, etc.)"></textarea>
+                                <textarea id="validationNotes" rows="2" placeholder="Add any notes about this validation (e.g., specific issues, observations, etc.)"></textarea>
                             </div>
                             <div class="action-buttons">
                                 <button id="copyAndSave" class="btn-primary" title="Save validation and copy to clipboard">💾 Save and Copy</button>

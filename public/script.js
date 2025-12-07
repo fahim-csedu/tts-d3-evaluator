@@ -137,6 +137,9 @@ class AudioFileBrowser {
         this.currentClipNumberSpan = document.getElementById('currentClipNumber');
         this.totalClipsSpan = document.getElementById('totalClips');
         this.validatedNumberSpan = document.getElementById('validatedNumber');
+
+        // Audio quality rating inputs
+        this.ratingGroups = Array.from(document.querySelectorAll('.rating-buttons'));
     }
     
     bindEvents() {
@@ -166,7 +169,7 @@ class AudioFileBrowser {
             this.selectAPIBtn.addEventListener('click', () => this.handleAPISelection());
         }
         this.customTranscriptInput.addEventListener('input', () => this.handleCustomTranscriptInput());
-        
+
         // Navigation control event listeners
         this.previousBtn.addEventListener('click', () => this.navigateToPrevious());
         this.nextBtn.addEventListener('click', () => this.navigateToNext());
@@ -234,6 +237,94 @@ class AudioFileBrowser {
                 e.preventDefault();
                 this.showKeyboardShortcuts();
             }
+        });
+
+        // Rating button handlers
+        this.ratingGroups.forEach(group => {
+            group.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    this.setRatingValue(group, Number(btn.dataset.value));
+                });
+            });
+        });
+    }
+
+    setRatingValue(group, value) {
+        const buttons = Array.from(group.querySelectorAll('button'));
+        if (!Number.isFinite(value)) {
+            buttons.forEach(btn => btn.classList.remove('active'));
+            return;
+        }
+        buttons.forEach(btn => {
+            const btnValue = Number(btn.dataset.value);
+            if (btnValue === value) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    validateQualityRatings() {
+        const missing = [];
+        const invalid = [];
+        const ratings = {};
+
+        const labels = {
+            naturalness: 'Naturalness',
+            intelligibility: 'Intelligibility',
+            prosody: 'Prosody',
+            pronunciation: 'Pronunciation',
+            overall: 'Overall'
+        };
+
+        this.ratingGroups.forEach(group => {
+            const key = group.dataset.rating;
+            const active = group.querySelector('button.active');
+            if (!active) {
+                missing.push(labels[key]);
+                return;
+            }
+            const value = Number(active.dataset.value);
+            if (!Number.isFinite(value) || value < 1 || value > 5) {
+                invalid.push(labels[key]);
+                return;
+            }
+            ratings[key] = value;
+        });
+
+        if (missing.length > 0) {
+            const message = `Please rate all audio quality fields (missing: ${missing.join(', ')}) with values between 1 and 5.`;
+            this.showSelectionFeedback(message, 'error');
+            this.annotationStatus.textContent = message;
+            this.annotationStatus.className = 'annotation-status error';
+            return null;
+        }
+
+        if (invalid.length > 0) {
+            const message = `Ratings must be between 1 and 5 (check: ${invalid.join(', ')}).`;
+            this.showSelectionFeedback(message, 'error');
+            this.annotationStatus.textContent = message;
+            this.annotationStatus.className = 'annotation-status error';
+            return null;
+        }
+
+        return ratings;
+    }
+
+    applyQualityRatings(data) {
+        const ratingFields = ['naturalness', 'intelligibility', 'prosody', 'pronunciation', 'overall'];
+        ratingFields.forEach(field => {
+            const group = this.ratingGroups.find(g => g.dataset.rating === field);
+            if (!group) return;
+            const value = data?.[field];
+            this.setRatingValue(group, value);
+        });
+    }
+
+    resetQualityRatings() {
+        this.ratingGroups.forEach(group => {
+            group.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
         });
     }
     
@@ -350,9 +441,14 @@ class AudioFileBrowser {
                 this.annotationStatus.className = 'annotation-status error';
                 return;
             }
+
+            const qualityRatings = this.validateQualityRatings();
+            if (!qualityRatings) {
+                return;
+            }
             
             // First, save the validation (skip auto-advance since we're copying)
-            const saved = await this.submitValidation(true);
+            const saved = await this.submitValidation(true, qualityRatings);
             if (!saved) {
                 // If save failed, don't proceed with copy
                 return;
@@ -390,6 +486,11 @@ class AudioFileBrowser {
                 originalTranscript,                                 // Original Transcript (newlines replaced with spaces)
                 correctedTranscript,                                // Corrected Transcript (newlines replaced with spaces)
                 this.selectedTranscript.is_reference_correct ? 'TRUE' : 'FALSE',  // is_transcript_correct
+                qualityRatings.naturalness,
+                qualityRatings.intelligibility,
+                qualityRatings.prosody,
+                qualityRatings.pronunciation,
+                qualityRatings.overall,
                 punctuationMissing,                                // Punctuation missing between sentences
                 duration,                                          // Duration (seconds)
                 combinedNotes,                                    // Notes (metadata + validation)
@@ -410,6 +511,7 @@ class AudioFileBrowser {
                     punctuationMissing: punctuationMissing,
                     duration: duration,
                     notes: combinedNotes,
+                    ...qualityRatings,
                     timestamp: new Date().toISOString()
                 };
                 
@@ -1574,7 +1676,7 @@ class AudioFileBrowser {
         await this.submitValidation();
     }
     
-    async submitValidation(skipAutoAdvance = false) {
+    async submitValidation(skipAutoAdvance = false, providedQualityRatings = null) {
         if (!this.selectedTranscript) {
             this.showSelectionFeedback('No selection made', 'error');
             return false;
@@ -1586,6 +1688,11 @@ class AudioFileBrowser {
             this.showSelectionFeedback('No file selected', 'error');
             return false;
         }
+
+        const qualityRatings = providedQualityRatings || this.validateQualityRatings();
+        if (!qualityRatings) {
+            return false;
+        }
         
         // Prepare validation data
         const validationData = {
@@ -1595,7 +1702,8 @@ class AudioFileBrowser {
             ideal_transcript: this.selectedTranscript.text,
             punctuation_missing: this.punctuationMissingInput?.checked || false,
             notes: this.validationNotesInput?.value?.trim() || '',
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            ...qualityRatings
         };
         
         try {
@@ -1702,6 +1810,7 @@ class AudioFileBrowser {
         this.selectReferenceBtn.style.background = '';
         if (this.selectAPIBtn) this.selectAPIBtn.style.background = '';
         this.selectionFeedback.style.display = 'none';
+        this.resetQualityRatings();
     }
     
     loadAnnotation(annotation) {
@@ -1766,6 +1875,9 @@ class AudioFileBrowser {
         } else {
             console.warn('validationNotesInput element not found');
         }
+
+        // Restore audio quality ratings
+        this.applyQualityRatings(annotation);
         
         // Show feedback that this is a previously annotated clip
         this.showSelectionFeedback(
@@ -1827,6 +1939,9 @@ class AudioFileBrowser {
             this.validationNotesInput.value = notes;
             console.log('Restored notes:', notes);
         }
+
+        // Restore audio quality ratings
+        this.applyQualityRatings(validation);
         
         // Show feedback that this is a previously validated clip
         this.showSelectionFeedback(

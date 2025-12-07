@@ -21,6 +21,11 @@ class ExcelExportService {
             { header: 'duration', key: 'duration', width: 12 },
             { header: 'reference_transcript', key: 'reference_transcript', width: 50 },
             { header: 'api_transcript', key: 'api_transcript', width: 50 },
+            { header: 'naturalness', key: 'naturalness', width: 14 },
+            { header: 'intelligibility', key: 'intelligibility', width: 16 },
+            { header: 'prosody', key: 'prosody', width: 12 },
+            { header: 'pronunciation', key: 'pronunciation', width: 16 },
+            { header: 'overall', key: 'overall', width: 12 },
             { header: 'is_reference_correct', key: 'is_reference_correct', width: 20 },
             { header: 'is_api_correct', key: 'is_api_correct', width: 20 },
             { header: 'ideal_transcript', key: 'ideal_transcript', width: 50 }
@@ -52,6 +57,11 @@ class ExcelExportService {
                 duration: duration,
                 reference_transcript: referenceTranscript,
                 api_transcript: apiTranscript,
+                naturalness: validation.naturalness ?? '',
+                intelligibility: validation.intelligibility ?? '',
+                prosody: validation.prosody ?? '',
+                pronunciation: validation.pronunciation ?? '',
+                overall: validation.overall ?? '',
                 is_reference_correct: validation.is_reference_correct ? 'TRUE' : 'FALSE',
                 is_api_correct: validation.is_api_correct ? 'TRUE' : 'FALSE',
                 ideal_transcript: validation.ideal_transcript

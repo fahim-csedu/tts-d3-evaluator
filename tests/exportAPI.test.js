@@ -97,6 +97,11 @@ describe('Export API Endpoint', () => {
                 api_transcript: 'এপিআই',
                 is_reference_correct: true,
                 is_api_correct: false,
+                naturalness: 4,
+                intelligibility: 5,
+                prosody: 4,
+                pronunciation: 5,
+                overall: 4,
                 ideal_transcript: 'রেফারেন্স'
             });
             
@@ -129,6 +134,11 @@ describe('Export API Endpoint', () => {
                 api_transcript: 'এপিআই',
                 is_reference_correct: true,
                 is_api_correct: false,
+                naturalness: 4,
+                intelligibility: 5,
+                prosody: 4,
+                pronunciation: 5,
+                overall: 4,
                 ideal_transcript: 'রেফারেন্স'
             });
             
@@ -139,6 +149,11 @@ describe('Export API Endpoint', () => {
                 api_transcript: 'আরেকটি এপিআই',
                 is_reference_correct: false,
                 is_api_correct: true,
+                naturalness: 3,
+                intelligibility: 4,
+                prosody: 3,
+                pronunciation: 4,
+                overall: 3,
                 ideal_transcript: 'আরেকটি এপিআই'
             });
             
@@ -166,9 +181,14 @@ describe('Export API Endpoint', () => {
             expect(headerRow.getCell(2).value).toBe('duration');
             expect(headerRow.getCell(3).value).toBe('reference_transcript');
             expect(headerRow.getCell(4).value).toBe('api_transcript');
-            expect(headerRow.getCell(5).value).toBe('is_reference_correct');
-            expect(headerRow.getCell(6).value).toBe('is_api_correct');
-            expect(headerRow.getCell(7).value).toBe('ideal_transcript');
+            expect(headerRow.getCell(5).value).toBe('naturalness');
+            expect(headerRow.getCell(6).value).toBe('intelligibility');
+            expect(headerRow.getCell(7).value).toBe('prosody');
+            expect(headerRow.getCell(8).value).toBe('pronunciation');
+            expect(headerRow.getCell(9).value).toBe('overall');
+            expect(headerRow.getCell(10).value).toBe('is_reference_correct');
+            expect(headerRow.getCell(11).value).toBe('is_api_correct');
+            expect(headerRow.getCell(12).value).toBe('ideal_transcript');
             
             // Check data rows (should have 2 validations)
             expect(worksheet.rowCount).toBe(3); // Header + 2 data rows
@@ -176,14 +196,24 @@ describe('Export API Endpoint', () => {
             // Check first data row
             const row1 = worksheet.getRow(2);
             expect(row1.getCell(1).value).toBe('2308268002');
-            expect(row1.getCell(5).value).toBe('TRUE');
-            expect(row1.getCell(6).value).toBe('FALSE');
+            expect(row1.getCell(5).value).toBe(4);
+            expect(row1.getCell(6).value).toBe(5);
+            expect(row1.getCell(7).value).toBe(4);
+            expect(row1.getCell(8).value).toBe(5);
+            expect(row1.getCell(9).value).toBe(4);
+            expect(row1.getCell(10).value).toBe('TRUE');
+            expect(row1.getCell(11).value).toBe('FALSE');
             
             // Check second data row
             const row2 = worksheet.getRow(3);
             expect(row2.getCell(1).value).toBe('2308268003');
-            expect(row2.getCell(5).value).toBe('FALSE');
-            expect(row2.getCell(6).value).toBe('TRUE');
+            expect(row2.getCell(5).value).toBe(3);
+            expect(row2.getCell(6).value).toBe(4);
+            expect(row2.getCell(7).value).toBe(3);
+            expect(row2.getCell(8).value).toBe(4);
+            expect(row2.getCell(9).value).toBe(3);
+            expect(row2.getCell(10).value).toBe('FALSE');
+            expect(row2.getCell(11).value).toBe('TRUE');
         });
     });
 });
