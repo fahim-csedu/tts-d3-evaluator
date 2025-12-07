@@ -276,3 +276,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+#python sample_tts_files.py --plan ./sampling_plan_collect_long_priority.csv --audio_root "D:\TTS D3\TTS D3 Data" --output ./collect_samples.csv

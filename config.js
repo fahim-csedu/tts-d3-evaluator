@@ -1,10 +1,10 @@
 // Configuration file for the TTS D3 Evaluator
 const config = {
     // Base directory for audio files (TTS D3 collect folder)
-    AUDIO_BASE_DIR: process.env.AUDIO_BASE_DIR || 'D:\\TTS D3\\TTS D3 Data\\collect',
+    AUDIO_BASE_DIR: process.env.AUDIO_BASE_DIR || 'D:\\TTS D3\\TTS D3 Data',
     
     // Directory for transcriptions (same as audio base dir - JSON files are in same folders)
-    TRANSCRIPTION_DIR: process.env.TRANSCRIPTION_DIR || 'D:\\TTS D3\\TTS D3 Data\\collect',
+    TRANSCRIPTION_DIR: process.env.TRANSCRIPTION_DIR || 'D:\\TTS D3\\TTS D3 Data',
     
     // Directory for annotation files
     ANNOTATIONS_DIR: process.env.ANNOTATIONS_DIR || 'D:\\TTS D3\\TTS D3 Data\\annotations',
