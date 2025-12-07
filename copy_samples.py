@@ -96,4 +96,4 @@ if __name__ == "__main__":
     main()
 
 # How to run
-# python copy_samples_with_json.py  --csv "D:\TTS D3\TTS D3 Data\collect_samples.csv"  --dest "D:\TTS D3\TTS D3 Data\collect_samples"
+# python copy_samples.py  --csv "./create_samples.csv"  --dest "D:\TTS D3\TTS D3 Data\samples"
