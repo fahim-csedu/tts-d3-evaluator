@@ -22,7 +22,6 @@ const CREATE_STRUCTURE_FILE = path.join(__dirname, 'create_structure.json');
 const COLLECT_STRUCTURE_FILE = path.join(__dirname, 'collect_structure.json');
 
 const BUCKETS = [
-    { label: '[0,1)', min: 0, max: 1 },
     { label: '[1,5)', min: 1, max: 5 },
     { label: '[5,10)', min: 5, max: 10 },
     { label: '[10,15)', min: 10, max: 15 },
@@ -146,24 +145,41 @@ function flattenCounts(structure, baseLabel) {
     return map;
 }
 
-function loadSamplingActuals() {
+function samplingKeyFromPath(p) {
+    if (!p) return null;
+    const norm = normalizeToForwardSlash(p).toLowerCase();
+    const collectIdx = norm.indexOf('collect/');
+    if (collectIdx >= 0) {
+        const parts = norm.slice(collectIdx).split('/');
+        if (parts.length >= 3) return parts.slice(0, 3).join('/');
+    }
+    const createIdx = norm.indexOf('create/');
+    if (createIdx >= 0) {
+        const parts = norm.slice(createIdx).split('/');
+        if (parts.length >= 2) return parts.slice(0, 2).join('/');
+    }
+    return null;
+}
+
+function loadAnnotationActuals() {
     const actuals = {};
-    const files = [
-        { path: COLLECT_STRUCTURE_FILE, base: 'collect' },
-        { path: CREATE_STRUCTURE_FILE, base: 'create' }
-    ];
-    files.forEach(fileInfo => {
-        if (!fs.existsSync(fileInfo.path)) {
-            console.warn('Structure file not found:', fileInfo.path);
-            return;
-        }
+    if (!fs.existsSync(ANNOTATIONS_DIR)) {
+        console.warn('Annotations dir missing, sampling actuals empty');
+        return actuals;
+    }
+    const files = fs.readdirSync(ANNOTATIONS_DIR).filter(f => f.endsWith('.json'));
+    files.forEach(file => {
         try {
-            const content = fs.readFileSync(fileInfo.path, 'utf-8');
-            const structure = JSON.parse(content);
-            const map = flattenCounts(structure, fileInfo.base);
-            Object.assign(actuals, map);
+            const content = fs.readFileSync(path.join(ANNOTATIONS_DIR, file), 'utf-8');
+            const data = JSON.parse(content);
+            const key = samplingKeyFromPath(data.absolute_path || data.absolutePath);
+            if (!key) return;
+            const label = bucketLabelForDuration(data.duration);
+            if (!label) return;
+            if (!actuals[key]) actuals[key] = emptyBucketCounts();
+            actuals[key][label] = (actuals[key][label] || 0) + 1;
         } catch (err) {
-            console.error('Failed to parse structure file', fileInfo.path, err);
+            console.warn('Failed to parse annotation file for sampling:', file, err.message);
         }
     });
     return actuals;
@@ -201,7 +217,7 @@ function buildSamplingProgress(targets, actuals) {
 async function ensureSamplingProgress() {
     if (samplingProgress) return samplingProgress;
     const targets = await loadSamplingTargets();
-    const actuals = loadSamplingActuals();
+    const actuals = loadAnnotationActuals();
     samplingProgress = buildSamplingProgress(targets, actuals);
     console.log(`Loaded sampling progress for ${Object.keys(samplingProgress).length} folders`);
     return samplingProgress;

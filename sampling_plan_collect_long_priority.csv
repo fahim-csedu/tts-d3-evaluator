@@ -1,0 +1,300 @@
+Folder,Total_Files,Total_Duration,Target Samples,"Samples [0, 1)","Samples [1, 5)","Samples [5, 10)","Samples [10, 15)","Samples [15, 20)","Samples [20, 25)","Samples [25, 30)",Samples [30+)
+collect/NCTB/AmarBanglaBoiClass1,361.0,921.27,1,0,0,1,0,0,0,0,0
+collect/NCTB/AmarBanglaBoiClass2,469.0,1571.17,1,0,0,0,0,1,0,0,0
+collect/NCTB/AmarBanglaBoiClass3,670.0,2426.38,1,0,0,0,0,1,0,0,0
+collect/NCTB/AmarBanglaBoiClass4,834.0,2965.15,1,0,0,0,0,1,0,0,0
+collect/NCTB/AmarBanglaBoiClass5,874.0,3282.57,1,0,0,0,0,0,0,0,1
+collect/NCTB/AmarBanglaBoiClass6,564.0,2506.75,1,0,0,0,0,0,0,0,1
+collect/NCTB/AmarBanglaBoiClass7,1037.0,4131.39,1,0,0,0,0,0,0,1,0
+collect/NCTB/AmarBanglaBoiClass8,1101.0,4679.75,1,0,0,0,0,0,0,0,1
+collect/NCTB/AnandaPathClass8,550.0,2618.37,1,0,0,0,0,0,1,0,0
+collect/NCTB/BanglaBeyakaronONirmirtiClass8,1237.0,5371.85,1,0,0,0,0,0,1,0,0
+collect/NCTB/BanglaGrammerClass9,1874.0,7777.92,1,0,0,0,0,0,0,0,1
+collect/NCTB/BanglaSahoPathClass9,958.0,3552.78,1,0,0,0,0,0,0,1,0
+collect/NCTB/BangladeshOBishwoPorichoyClass5,579.0,2623.83,1,0,0,0,0,1,0,0,0
+collect/NCTB/BangladeshOBishwoporichoyClass3,452.0,1622.29,1,0,0,0,0,1,0,0,0
+collect/NCTB/BangladeshOBishwoporichoyClass4,531.0,2200.34,1,0,0,0,0,0,0,1,0
+collect/NCTB/BangladeshOBishwoporichoyClass8DaisyMutimedia,987.0,5519.99,1,0,0,0,0,0,0,0,1
+collect/NCTB/BangladeshOBishwoporichoyClass9,1043.0,5874.28,1,0,0,0,0,0,0,1,0
+collect/NCTB/BangladeshOBishwosobhotaClass9,1689.0,8819.7,1,0,0,0,0,0,0,0,1
+collect/NCTB/BhugolOPoribeshClass9,1434.0,8431.78,1,0,0,0,0,0,0,0,1
+collect/NCTB/BigganClass3,483.0,2114.48,1,0,0,0,0,1,0,0,0
+collect/NCTB/BigganClass4,694.0,3153.48,1,0,0,0,0,0,1,0,0
+collect/NCTB/BigganClass5,628.0,3126.67,1,0,0,0,0,0,1,0,0
+collect/NCTB/BuddhaDharmaClass3,646.0,2072.0,1,0,0,0,0,1,0,0,0
+collect/NCTB/BuddhaDharmaClass4,809.0,2947.1,1,0,0,0,0,1,0,0,0
+collect/NCTB/BuddhaDharmaClass7,211.0,1032.71,1,0,0,0,1,0,0,0,0
+collect/NCTB/CareerEducationClass9,660.0,3188.54,1,0,0,0,0,1,0,0,0
+collect/NCTB/CharuOKarokolaClass8,155.0,611.01,1,0,0,0,0,0,0,0,1
+collect/NCTB/CharuOKarukolaClass9,306.0,1920.96,1,0,0,0,0,0,0,1,0
+collect/NCTB/ChristanDharmaClass6,296.0,1347.58,1,0,0,0,0,1,0,0,0
+collect/NCTB/ChristanDharmaClass7,207.0,978.02,1,0,0,0,1,0,0,0,0
+collect/NCTB/ChristianDharmaClass3,471.0,2394.87,1,0,0,0,0,0,1,0,0
+collect/NCTB/ChristianDharmaClass4,592.0,2715.16,1,0,0,0,0,0,0,0,1
+collect/NCTB/ChristianDharmaClass5,699.0,3156.67,1,0,0,0,0,0,1,0,0
+collect/NCTB/DigitalTechnologyClass6,377.0,2377.08,1,0,0,0,0,0,0,0,1
+collect/NCTB/DigitalTechnologyClass7,163.0,982.92,1,0,0,0,0,0,0,1,0
+collect/NCTB/EconomicsClass9,906.0,4691.87,1,0,0,0,0,0,1,0,0
+collect/NCTB/GrahosthaBigganClass8,814.0,3879.75,1,0,0,0,0,0,0,0,1
+collect/NCTB/GrahosthaBigganClass9,1463.0,7087.75,1,0,0,0,0,0,1,0,0
+collect/NCTB/HealthProtectionClass6,410.0,2309.97,1,0,0,0,0,0,0,0,1
+collect/NCTB/HealthProtectionClass7,751.0,3452.86,2,0,0,0,0,0,1,1,0
+collect/NCTB/HinduDharmaClass4,641.0,1750.93,1,0,0,0,0,1,0,0,0
+collect/NCTB/HinduDharmaClass5,752.0,2488.14,2,0,0,0,0,2,0,0,0
+collect/NCTB/HinduDharmaClass6,174.0,796.08,1,0,0,0,1,0,0,0,0
+collect/NCTB/HinduDharmaClass7,185.0,889.82,1,0,0,0,1,0,0,0,0
+collect/NCTB/HistoryAndSocialScienceAnushandhaniBookClass6,426.0,2601.99,1,0,0,0,0,0,1,0,0
+collect/NCTB/HistoryAndSocialScienceAnushilonBookClass6,1202.0,6463.61,1,0,0,0,0,0,1,0,0
+collect/NCTB/HistoryAndSocialScienceAnushilonBookClass7,463.0,2659.32,1,0,0,0,0,0,1,0,0
+collect/NCTB/ICTClass8,147.0,772.81,1,0,0,0,0,0,0,1,0
+collect/NCTB/ICTClass9,749.0,4085.03,1,0,0,0,0,0,0,1,0
+collect/NCTB/IslamDharmaClass3,478.0,1619.43,1,0,0,0,1,0,0,0,0
+collect/NCTB/IslamDharmaClass4,667.0,2403.89,1,0,0,0,0,0,1,0,0
+collect/NCTB/IslamDharmaClass6DaisyMultImedia,628.0,2594.83,1,0,0,0,1,0,0,0,0
+collect/NCTB/IslamDharmaClass7,1056.0,5243.78,1,0,0,0,0,0,0,1,0
+collect/NCTB/JibonOJibikaClass6,613.0,2836.88,1,0,0,0,0,1,0,0,0
+collect/NCTB/JibonOJibikaClass7,829.0,4176.75,1,0,0,0,0,0,0,1,0
+collect/NCTB/KarmaOJibonMukhiClass8,493.0,2155.64,1,0,0,0,0,0,0,1,0
+collect/NCTB/KrishiShikkhaClass8DaisyMulmedia,220.0,1210.46,1,0,0,0,0,0,0,0,1
+collect/NCTB/KrishiShikkhaClass9,1653.0,8054.98,1,0,0,0,0,0,0,0,1
+collect/NCTB/PouronitiONagorikotaClass9,268.0,1863.91,1,0,0,0,0,0,0,0,1
+collect/NCTB/PrathamikGonitClass1,661.0,1787.68,1,0,0,0,0,1,0,0,0
+collect/NCTB/PrathamikGonitClass2,627.0,2144.67,1,0,0,0,0,1,0,0,0
+collect/NCTB/PrathamikGonitClass3,693.0,2994.23,1,0,0,0,0,0,1,0,0
+collect/NCTB/PrathamikGonitClass4,901.0,4482.92,1,0,0,0,0,0,0,0,1
+collect/NCTB/PrathamikGonitClass5,880.0,3905.17,1,0,0,0,0,1,0,0,0
+collect/NCTB/PrathamikGonitClass8,19.0,189.17,1,0,0,0,0,0,0,0,1
+collect/NCTB/ScienceAnushilonBookClass6,795.0,4129.31,1,0,0,0,0,0,1,0,0
+collect/NCTB/ScienceAnushondhaniPathClass6,300.0,1797.28,1,0,0,0,0,0,0,1,0
+collect/NCTB/ScienceAnushondhaniPathClass7,390.0,2034.48,1,0,0,0,0,0,0,1,0
+collect/NCTB/ScienceClass8,1097.0,4885.15,1,0,0,0,0,0,0,0,1
+collect/NCTB/ScienceClass9,1572.0,8628.58,1,0,0,0,0,0,0,1,0
+collect/NCTB/SharirikhShikkhaOShasthaClass8,493.0,2179.31,1,0,0,0,0,1,0,0,0
+collect/NCTB/SharirikhShikkhaOShasthaClass9,1082.0,5556.76,1,0,0,0,0,0,0,1,0
+collect/NCTB/ShilpoAbongSanskritiClass6,242.0,1384.59,1,0,0,0,0,0,0,0,1
+collect/NCTB/ShilpoAbongSanskritiClass7,163.0,807.38,1,0,0,0,0,0,1,0,0
+collect/TalkingBook/1 Bangladesher Ridoy,3.0,76.25,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/1 Bolai,11.0,308.62,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/10 Bangladesher Khudra Jati Shatta,15.0,402.39,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/10 Eiakhre,4.0,115.05,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/10bangla noboborsho,8.0,222.23,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/10prarthi,3.0,81.83,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/11ekush,2.0,53.08,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/1manobdhormo,1.0,26.77,1,0,0,0,0,0,0,1,0
+collect/TalkingBook/1otithi,14.0,390.06,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/2 Ananda,2.0,52.4,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/2 Library,4.0,90.72,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/2banglalir_bangla_golpo,8.0,218.05,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/2baongovumi er proti,9.0,196.98,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/3 Apurba,8.0,161.74,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/3 Mallodan,13.0,344.64,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/3dui_bigha,9.0,212.89,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/3porejaoa,9.0,247.36,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/4 Kuli Mujur,6.0,141.45,1,0,0,0,0,0,0,1,0
+collect/TalkingBook/4 Lal Ghora,11.0,286.21,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/4pache_loke _kisu bole,3.0,62.58,1,0,0,0,0,0,1,0,0
+collect/TalkingBook/4toilchitrer bhot,12.0,329.93,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/5 Bangabandhu,7.0,176.31,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/5 Lokha,7.0,176.7,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/5nari,6.0,149.81,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/5shongram,4.0,118.83,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/6 Mela,5.0,117.75,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/6 sobi rong,7.0,195.57,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/6abar_ashino fire,6.0,163.9,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/6lokshilpo,10.0,278.48,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/7 May Diner Kabita,2.0,60.0,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/7 Rokeya,3.0,78.03,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/7desh,4.0,75.19,1,0,0,0,0,0,1,0,0
+collect/TalkingBook/7shukhi_manush,5.0,128.48,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/8 Shabdo Kabita,10.0,262.02,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/8 Upodesh,3.0,52.87,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/8nodi,5.0,116.58,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/8shilpokola,7.0,197.33,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/9 Shei chaleti,9.0,229.36,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/9 Sritishodho,5.0,136.71,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/9jago,8.0,196.39,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/9mongru,11.0,285.93,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Aaj Srishti-Sukher Ullashe-Kazi Nazrul Islam,11.0,260.86,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Aam-Atir Vepu - Bivutibhushan Bandopaddhay,13.0,342.61,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Abak Shurjodoy - Hasan Hafizur Rahman,5.0,120.55,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Akash,10.0,237.54,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Amader Sangskriti - Anisuzzaman,9.0,231.79,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Amar Desh - Sufiya Kamal,6.0,111.83,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Amar Porichoy - Sayed Shamsul Haque,12.0,330.29,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Amar Shantan - Varotchandro Raygunakar,5.0,112.4,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Ami Kono Aguntok Noi - Ahsan Habib,4.0,81.88,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Andho Bodhu - Jotindramohan Bagchi,3.0,71.61,1,0,0,0,0,0,1,0,0
+collect/TalkingBook/Asha - Sikandar Abu Jafor,5.0,116.25,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Avaghir Swargo - Sharatchandra Chattopaddhay,16.0,383.23,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Ban Manush - Abu Ishaq,13.0,356.76,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Bandh - Jahir Rayhan,8.0,195.68,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Bishaw Nabi Part 2,137.0,3277.13,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Bishaw Nobi Part 1,421.0,10261.44,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Boi Pora - Promath Chawdhuri,13.0,307.85,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Boishakh - Al Mahmud,3.0,57.19,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Brishti - Farrukh Ahmed,2.0,44.91,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Chapter 1,18.0,489.75,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Chapter 2,15.0,387.0,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Chapter 3,10.0,271.33,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Chapter 4,9.0,232.13,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Chapter 5,10.0,229.77,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Chuniya Amar Arkedia - Rafiq Azad,9.0,225.67,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Denapaona - Rabindranath Tagor,10.0,283.05,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Ekattarer Dinguli - Jahanara Imam,20.0,506.37,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Ekti Kafi - Bishnu Dey,2.0,18.43,1,0,0,0,0,1,0,0,0
+collect/TalkingBook/Fagun Mash,6.0,149.16,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Fuler Bibaho - Bongkimchandro Chattopaddhay,12.0,277.99,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Etihash O Sangskriti For Class 11 & 12 Chapter 1,39.0,1053.25,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Etihash O Sangskriti For Class 11 & 12 Chapter 2,97.0,2480.14,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Etihash O Sangskriti For Class 11 & 12 Chapter 3,130.0,3309.17,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Etihash O Sangskriti For Class 11 & 12 Chapter 4,100.0,2668.59,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Etihash O Sangskriti For Class 11 & 12 Chapter 5,121.0,3118.2,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Etihash O Sangskriti For Class 11 & 12 Chapter 6,24.0,671.81,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Etihash O Sangskriti For Class 11 & 12 Chapter 7,26.0,722.43,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Etihash O Sangskriti For Class 11 & 12 Cover Page,3.0,90.0,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Itihash O Sangskriti Part-2 Cl 11&12 Cover MP3,4.0,120.0,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Itihash O Sangskriti part-2 Chapter 02 MP3,143.0,3699.22,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Itihash O Sangskriti part-2 Chapter 03 MP3,231.0,5966.15,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Itihash O Sangskriti part-2 Chapter 04 MP3,77.0,2010.93,2,0,0,0,0,0,0,0,2
+collect/TalkingBook/Islamer Itihash O Sangskriti part-2 Chapter 05 MP3,21.0,573.12,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Itihash O Sangskriti part-2 Chapter 06 MP3,33.0,898.9,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Islamer Itihash O Sanskriti part-2 Chapter 01 MP3,89.0,2291.85,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Janmo Vumi,5.0,86.82,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Jharnar Gan - Sottendranath Datta,3.0,76.32,1,0,0,0,0,0,0,1,0
+collect/TalkingBook/Jibon Sanghit - Hemchandro Bandopaddhay,5.0,120.65,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Jibone Shilper Sthan - S. Wazed Ali,10.0,276.78,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya 1st Paper for Class 11 & 12 - Chapter 1,51.0,1357.8,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya 1st Paper for Class 11 & 12 - Chapter 2,29.0,758.05,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya 1st Paper for Class 11 & 12 - Chapter 3,85.0,2072.87,2,0,0,0,0,0,0,0,2
+collect/TalkingBook/Juktibidya 1st Paper for Class 11 & 12 - Chapter 4,18.0,408.43,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya 1st Paper for Class 11 & 12 - Chapter 5,20.0,508.33,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya 1st Paper for Class 11 & 12 - Chapter 6,126.0,3171.24,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya 1st Paper for Class 11 & 12 - Chapter 7,111.0,2848.51,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya 1st Paper for Class 11 & 12 - Chapter 8,53.0,1280.13,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya 1st Paper for Class 11 & 12 - Cover Page,13.0,338.58,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya part-2 cl 11&12 Beboharik Kaz MP3,36.0,917.45,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya part-2 cl 11&12 Chapter 01 MP3,22.0,602.65,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya part-2 cl 11&12 Chapter 04 MP3,42.0,1162.16,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya part-2 cl 11&12 Chapter 05 MP3,119.0,3202.07,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya part-2 cl 11&12 Chapter 06 MP3,34.0,927.03,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya part-2 cl 11&12 Chapter 07MP3,26.0,659.82,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya part-2 cl 11&12 Chapter 08 MP3,34.0,863.5,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya part-2cl 11&12 Chapter 02 MP3,27.0,739.57,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya part-2cl 11&12 Chapter 03 MP3,92.0,2552.19,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juktibidya part-2cl 11&12 Cover MP3,5.0,131.78,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Juta-Abishkar - Rabindranath Tagore,9.0,183.45,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Kapotakkho Nod - Mikel Modhusudan Datto,5.0,119.64,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Katodike Kato Karigor,10.0,256.24,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Katokal Dhore,10.0,249.27,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Khotiyan - Rudro Muhammad Shahidullah,3.0,68.65,1,0,0,0,0,0,0,1,0
+collect/TalkingBook/Library - Rabindranath Tagor,6.0,134.76,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Manush - Kazi Nazrul Islam,3.0,73.54,1,0,0,0,0,0,0,1,0
+collect/TalkingBook/Manush Muhammad (Sm.) - Mohammad Wazed Ali,9.0,239.61,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Minu,8.0,186.64,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Momotadi - Manik Bandopaddhay,12.0,326.21,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Mother Terisa,9.0,227.23,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Mujib,5.0,120.83,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Nimgach - Banoful,5.0,106.22,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Niriho Bangali - Rokeya Sakhawat Hossain,3.0,74.68,1,0,0,0,0,0,0,1,0
+collect/TalkingBook/Niyoti - Humayun Ahmed,7.0,188.37,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Omar Ekush,11.0,281.56,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Palamou - Shanjibchandro Chattopaddhay,14.0,377.07,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Payla Boishakh - Kabir Choudhury,8.0,217.47,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Polli Janoni - Jashim Uddin,7.0,157.4,1,0,0,0,0,0,0,1,0
+collect/TalkingBook/Pollishahitto - Muhammad Shahidullah,8.0,192.02,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Poster - Abul Hossain,2.0,15.99,1,0,0,0,1,0,0,0,0
+collect/TalkingBook/Pouroniti O Shooshashon for Class 11 & 12 P-1 Chapter 1,71.0,1949.85,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shooshashon for Class 11 & 12 P-1 Chapter 10,33.0,912.48,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shooshashon for Class 11 & 12 P-1 Chapter 2,19.0,531.43,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shooshashon for Class 11 & 12 P-1 Chapter 3,57.0,1623.35,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shooshashon for Class 11 & 12 P-1 Chapter 4,13.0,338.7,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shooshashon for Class 11 & 12 P-1 Chapter 5,47.0,1253.41,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shooshashon for Class 11 & 12 P-1 Chapter 6,47.0,1280.44,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shooshashon for Class 11 & 12 P-1 Chapter 7,159.0,4468.75,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shooshashon for Class 11 & 12 P-1 Chapter 8,23.0,655.73,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shooshashon for Class 11 & 12 P-1 Chapter 9,16.0,448.69,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shooshashon for Class 11 & 12 P-1 Cover Page,7.0,162.4,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shushashon Part-2 Class 11 & 12 Chapter 01,100.0,2638.88,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shushashon Part-2 Class 11 & 12 Chapter 02,69.0,1916.16,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shushashon Part-2 Class 11 & 12 Chapter 03,70.0,1920.64,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shushashon Part-2 Class 11 & 12 Chapter 04,65.0,1809.02,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shushashon Part-2 Class 11 & 12 Chapter 05,73.0,1953.41,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shushashon Part-2 Class 11 & 12 Chapter 06,37.0,963.31,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shushashon Part-2 Class 11 & 12 Chapter 07,20.0,579.2,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shushashon Part-2 Class 11 & 12 Chapter 08,32.0,899.76,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shushashon Part-2 Class 11 & 12 Chapter 09,56.0,1595.63,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shushashon Part-2 Class 11 & 12 Chapter 10,45.0,1148.81,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Pouroniti O Shushashon Part-2 Class 11 & 12 Cover Page,2.0,44.15,1,0,0,0,0,0,0,1,0
+collect/TalkingBook/Pran - Rabindranath Tagore,6.0,144.38,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Probash Bondhu - Sayed Mujtaba Ali,11.0,307.74,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Prottopakar - Ishwarchandra Bidya Sagor,7.0,190.24,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Rachi vromon,8.0,205.07,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Rahmaner Ma - Ranesh Dash Gupto,10.0,253.91,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Rokte Veza Ekush - Selina Hossain,9.0,246.01,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Runner - Sukanto Vattacharjo,2.0,56.48,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Sankota Dulche - Sunil Gongopaddhay,6.0,171.63,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Sayabaji - Sukumar Roy,1.0,30.0,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shadhinata - Rangolal Bandopaddhay,6.0,140.4,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shadhinata Amar Shadhinata-Mamotajuddin Ahmad,12.0,318.4,1,0,0,0,0,0,0,0,1
+"collect/TalkingBook/Shadhinata, A Shabdoti Kivabe Amader Holo - Nirmalendu Gun",7.0,171.68,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shahitter Roop  O Riti-Hayat Mahmud,19.0,497.42,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shahoshi Janoni Bangla - Kamal Chawdhury,7.0,161.91,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbiggan Part-2 Class 11 & 12 Chapter 01 MP3,68.0,1754.16,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbiggan Part-2 Class 11 & 12 Chapter 03 MP3,26.0,677.72,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbiggan Part-2 Class 11 & 12 Chapter 04 MP3,12.0,323.73,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbiggan Part-2 Class 11 & 12 Chapter 05 MP3,40.0,1019.4,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbiggan Part-2 Class 11 & 12 Chapter 06 MP3,37.0,1020.78,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbiggan Part-2 Class 11 & 12 Chapter 07 MP3,29.0,785.5,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbiggan Part-2 Class 11 & 12 Chapter 08 MP3,41.0,1065.38,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbiggan Part-2 Class 11 & 12 Chapter 09 MP3,61.0,1620.98,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbiggan Part-2 Class 11 & 12 Cover MP3,4.0,120.0,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbiggan Part-2 Class 11 & 12- Chapter 10 MP3,128.0,3544.2,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbiggan Part-2 Class 11 & 12Chapter 02 MP3,14.0,358.18,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbiggan Part-2 Class 11&12 Chapter 11 MP3,25.0,675.77,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbigyan 1st Paper for  Class 11 & 12 -  Chapter 10 MP3,78.0,2181.34,2,0,0,0,0,0,0,0,2
+collect/TalkingBook/Shamajbigyan 1st Paper for  Class 11 & 12 - Chapter 11 MP3,36.0,992.28,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbigyan 1st Paper for Class 11 & 12 - Chapter - 2 MP3,14.0,373.0,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbigyan 1st Paper for Class 11 & 12 - Chapter 1 MP3,67.0,1808.86,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbigyan 1st Paper for Class 11 & 12 - Chapter 3 MP3,44.0,1165.14,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbigyan 1st Paper for Class 11 & 12 - Chapter 4 MP3,89.0,2455.85,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbigyan 1st Paper for Class 11 & 12 - Chapter 5 MP3,41.0,1044.36,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbigyan 1st Paper for Class 11 & 12 - Chapter 6 MP3,20.0,527.15,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbigyan 1st Paper for Class 11 & 12 - Chapter 7 MP3,20.0,534.06,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbigyan 1st Paper for Class 11 & 12 - Chapter 8 MP3,56.0,1451.63,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbigyan 1st Paper for Class 11 & 12 - Chapter 9 MP3,74.0,2055.87,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajbigyan 1st Paper for Class 11 & 12 - Cover Page MP3,1.0,30.0,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo 1st Paper for Class 11 & 12 - Chapter 2,33.0,877.29,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo 1st Paper for Class 11 & 12 - Chapter 3,47.0,1207.8,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo 1st Paper for Class 11 & 12 - Chapter 4,72.0,1909.62,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo 1st Paper for Class 11 & 12 - Chapter 5,64.0,1698.44,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo 1st Paper for Class 11 & 12 - Chapter 6,159.0,4206.7,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo 1st Paper for Class 11 & 12 - Chapter 7,82.0,2297.54,2,0,0,0,0,0,0,0,2
+collect/TalkingBook/Shamajkarmo 1st Paper for Class 11 & 12 - Chapter 8,27.0,657.77,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo 1st Paper for Class 11 & 12 -Chapter 1,27.0,721.74,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo 1st Paper for Class 11 & 12 cover page,1.0,18.18,1,0,0,0,0,1,0,0,0
+collect/TalkingBook/Shamajkarmo Part 2 Class 11 & 12 Chapter 01 MP3,34.0,938.59,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo Part 2 Class 11 & 12 Cover Page MP3,4.0,101.03,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo Part-2 Class 11 & 12 Chapter 02 MP3,42.0,1141.36,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo Part-2 Class 11 & 12 Chapter 03 MP3,150.0,4065.19,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo Part-2 Class 11 & 12 Chapter 05 MP3,38.0,1042.97,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo Part-2 Class 11 & 12 Chapter 06 MP3,64.0,1744.61,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo Part-2 Class 11 & 12 Chapter 07 MP3,40.0,1003.17,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo Part-2 Class 11 & 12 Chapter 08 MP3,26.0,646.45,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo Part-2 Class 11 & 12 Chapter 09 MP3,30.0,844.34,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shamajkarmo Part-2 Class 11 & 12 Chapter 4 MP3,43.0,1141.28,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shei Din Ei Math - Jibonanando Dash,3.0,61.23,1,0,0,0,0,0,1,0,0
+collect/TalkingBook/Shikkha O Monushshotto - Motaher Hossain Chawdhuri,7.0,158.72,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shomoy Ghele Shadhon Hobe Na - Lalon Shah,5.0,104.62,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shova,11.0,229.84,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shuk,3.0,64.94,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Shukher Laghiya - Ghan Dash,2.0,47.57,1,0,0,0,0,0,0,1,0
+collect/TalkingBook/Shuva - Rabindranath Tagor,19.0,436.29,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Tolpar,11.0,276.58,1,0,0,0,0,0,0,0,1
+"collect/TalkingBook/Tomake Paoar Jonne, He Shadhinata-Shamsur Rahman",2.0,60.0,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Tottho O Projukti - Muhammad Jafor Iqbal,8.0,188.2,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Uddom O Porisrom - Mohammad Lutfar Rahman,10.0,279.86,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/Upekkito Shaktir Udbodhon - Kazi Nazrul Islam,5.0,147.72,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/bachte_dao,9.0,218.86,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/jhingeful,3.0,61.37,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/lal goruta,9.0,212.94,1,0,0,0,0,0,0,0,1
+collect/TalkingBook/pakhir_kase_fuler_kase,5.0,108.65,1,0,0,0,0,0,0,1,0

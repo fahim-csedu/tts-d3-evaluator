@@ -399,14 +399,14 @@ main {
 .sampling-ribbon-table {
     display: grid;
     grid-template-columns: repeat(7, minmax(90px, 1fr));
-    gap: 6px;
+    gap: 4px;
 }
 
 .sampling-ribbon .bucket-cell {
     background: #f9fafb;
     border: 1px solid #e5e7eb;
     border-radius: 6px;
-    padding: 6px 8px;
+    padding: 4px 6px;
     text-align: center;
     font-size: 13px;
     line-height: 1.4;
